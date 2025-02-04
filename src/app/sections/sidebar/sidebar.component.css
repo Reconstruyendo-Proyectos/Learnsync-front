@@ -1,5 +1,54 @@
 aside {
-    width: 33.33%;
+    width: 20%;
     height: 100%;
-    background-color: red;
+    border-right: 1px solid #6F6F6F;
+}
+
+div {
+    padding: 1rem;
+}
+
+li {
+    margin: 2rem 0;
+    padding: 15px;
+}
+
+li .icon-li {
+    margin-left: 1px;
+    padding: 0;
+}
+
+span {
+    cursor: pointer;
+}
+
+h1 {
+    color: #6F6F6F;
+    letter-spacing: 15%;
+    font-size: 20px;
+}
+
+.general {
+    border-bottom: 1px solid #6F6F6F;
+}
+
+.general ul {
+    margin-top: -20px;
+}
+
+.topics {
+    border-bottom: 1px solid #6F6F6F;
+}
+
+.active-link {
+    background-color: #eceaeace;
+    border-radius: 15px;
+    
+}
+
+.icon-li {
+    display: flex;
+    gap: 10px;
+    margin-left: -20px;
+    align-items: center;
 }
