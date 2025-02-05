@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "learnsync": {
+    "Learnsync": {
       "projectType": "application",
       "schematics": {},
       "root": "",
@@ -29,12 +29,7 @@
             "styles": [
               "src/styles.css"
             ],
-            "scripts": [],
-            "server": "src/main.server.ts",
-            "outputMode": "server",
-            "ssr": {
-              "entry": "src/server.ts"
-            }
+            "scripts": []
           },
           "configurations": {
             "production": {
@@ -64,10 +59,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "buildTarget": "learnsync:build:production"
+              "buildTarget": "Learnsync:build:production"
             },
             "development": {
-              "buildTarget": "learnsync:build:development"
+              "buildTarget": "Learnsync:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -97,8 +92,5 @@
         }
       }
     }
-  },
-  "cli": {
-    "analytics": false
   }
 }

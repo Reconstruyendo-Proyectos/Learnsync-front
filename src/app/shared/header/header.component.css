@@ -1,6 +1,6 @@
 header {
     background-color: #0A2A3E;
-    width: 100%;
+    max-width: 100%;
     padding: 0.1rem 0;
 }
 
@@ -13,4 +13,17 @@ header {
 .logo {
     width: 80px;
     height: 70px;
+}
+
+.menu {
+    display: none;
+}
+
+@media (width <= 768px) {
+    .menu {
+        display: inline;
+        width: 35px;
+        height: 35px;
+        color: #fff;
+    }
 }

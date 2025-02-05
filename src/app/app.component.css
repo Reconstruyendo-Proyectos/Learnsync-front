@@ -1,3 +1,10 @@
 .body {
     display: flex;
 }
+
+@media (width <= 768px) {
+    app-sidebar {
+        display: none;
+        width: 250px;
+    }
+} 

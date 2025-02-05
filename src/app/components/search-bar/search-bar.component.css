@@ -28,3 +28,9 @@
 .search-icon:hover {
     color: #B9B9B9;
 }
+
+@media (width <= 768px) {
+    .input {
+        width: auto;
+    }
+}
