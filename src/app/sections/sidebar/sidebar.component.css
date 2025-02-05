@@ -1,6 +1,17 @@
 aside {
-    height: 100%;
-    border-right: 1px solid #6F6F6F;
+    width: 250px;
+    background-color: #fff;
+    position: fixed;
+    top: 100;
+    left: 0;
+    height: 100vh;
+    z-index: 1000;
+    transition: transform 0.3s ease-in-out;
+    transform: translateX(-100%);
+}
+
+aside.open {
+    transform: translateX(0);
 }
 
 div {
@@ -50,4 +61,11 @@ h1 {
     gap: 10px;
     margin-left: -20px;
     align-items: center;
+}
+
+@media (width > 768px) {
+    aside {
+        position: relative;
+        transform: translateX(0);
+    }
 }
