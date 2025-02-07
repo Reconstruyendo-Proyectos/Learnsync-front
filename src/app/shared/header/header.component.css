@@ -2,6 +2,9 @@ header {
     background-color: #0A2A3E;
     max-width: 100%;
     padding: 0.1rem 0;
+    position: sticky;
+    top: 0;
+    z-index: 1001;
 }
 
 .header {

@@ -1,6 +1,5 @@
 .body {
     display: flex;
-    height: 100vh;
 }
 
 .content-overlay-wrapper {
@@ -12,11 +11,12 @@
 .content-overlay-wrapper.content-overlay {
     background-color: rgba(0, 0, 0, 0.5);
     pointer-events: none;
+    z-index: 999;
 }
 
 @media (width > 768px) {
     .content-overlay-wrapper {
-        margin-left: 50px;
+        margin-left: 10px;
         margin-top: 10px;
     }
 

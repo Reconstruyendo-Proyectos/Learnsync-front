@@ -1,0 +1,29 @@
+.category-container {
+    margin-top: 20px;
+}
+
+.topics {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+h2 {
+    margin-bottom: 20px;
+}
+
+h1 {
+    letter-spacing: 1.5px;
+}
+
+@media (width <= 768px) {
+    .topics {
+        justify-content: center;
+    }
+
+    .category-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+}

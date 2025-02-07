@@ -39,6 +39,7 @@ p {
 
 .list-benefits li {
     margin-bottom: 5px;
+    margin-left: 20px;
 }
 
 ul li:first-child {

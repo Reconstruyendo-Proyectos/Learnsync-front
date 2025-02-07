@@ -8,6 +8,7 @@ aside {
     z-index: 1000;
     transition: transform 0.3s ease-in-out;
     transform: translateX(-100%);
+    border-right: #948e8e38 1px solid;
 }
 
 aside.open {
@@ -39,7 +40,7 @@ h1 {
 }
 
 .general {
-    border-bottom: 1px solid #6F6F6F;
+    border-bottom: 1px solid #948e8e38;
 }
 
 .general ul {
