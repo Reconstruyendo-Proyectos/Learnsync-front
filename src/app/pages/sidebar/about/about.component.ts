@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { TextImageComponent } from "../../sections/text-image/text-image.component";
+import { TextImageComponent } from "../../../sections/text-image/text-image.component";
 
 @Component({
   selector: 'app-about',

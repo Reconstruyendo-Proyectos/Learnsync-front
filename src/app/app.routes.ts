@@ -1,9 +1,12 @@
 import { Routes } from '@angular/router';
-import { HomeComponent } from './pages/home/home.component';
-import { HistoryComponent } from './pages/history/history.component';
-import { AboutComponent } from './pages/about/about.component';
-import { PopularComponent } from './pages/popular/popular.component';
-import { CategoriesComponent } from './pages/categories/categories.component';
+import { HomeComponent } from './pages/sidebar/home/home.component';
+import { HistoryComponent } from './pages/sidebar/history/history.component';
+import { AboutComponent } from './pages/sidebar/about/about.component';
+import { PopularComponent } from './pages/sidebar/popular/popular.component';
+import { CategoriesComponent } from './pages/sidebar/categories/categories.component';
+import { LoginComponent } from './pages/auth/login/login.component';
+import { RegisterComponent } from './pages/auth/register/register.component';
+import { ForgotPasswordComponent } from './pages/auth/forgot-password/forgot-password.component';
 
 export const routes: Routes = [
     { path: '', component: HomeComponent },
@@ -11,4 +14,7 @@ export const routes: Routes = [
     { path: 'history', component: HistoryComponent },
     { path: 'popular', component: PopularComponent },
     { path: 'categories', component: CategoriesComponent },
+    { path: 'login', component: LoginComponent },
+    { path: 'register', component: RegisterComponent },
+    { path: 'forgot-password', component: ForgotPasswordComponent }
 ];

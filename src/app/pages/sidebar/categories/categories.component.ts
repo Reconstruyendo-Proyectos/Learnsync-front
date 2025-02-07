@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { CardTopicsComponent } from "../../components/card-topics/card-topics.component";
+import { CardTopicsComponent } from "../../../components/card-topics/card-topics.component";
 
 @Component({
   selector: 'app-categories',
