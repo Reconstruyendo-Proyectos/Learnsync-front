@@ -1,0 +1,13 @@
+<h1>{{h1}}</h1>
+<div class="about-container">
+    <div class="about-left">
+        <p *ngFor="let p of pList1">{{p}}</p>
+        <ul class="list-benefits">
+            <li *ngFor="let item of list">{{item}}</li>
+        </ul>
+        <p *ngFor="let p of pList2">{{p}}</p>
+    </div>
+    <div class="about-right about-image">
+        <img class="image" src={{srcImage}} alt={{altText}}>
+    </div>
+</div>
