@@ -1,7 +1,12 @@
 <app-header></app-header>
+
 <div class="body">
-    <app-sidebar [open]="isSidebarOpen"></app-sidebar>
-    <div class="content-overlay-wrapper" [class.content-overlay]="isSidebarOpen">
-        <router-outlet></router-outlet>
-    </div>
+  <app-sidebar 
+    *ngIf="sidebarService.isSidebarVisible()" 
+    [open]="isSidebarOpen">
+  </app-sidebar>
+
+  <div class="content-overlay-wrapper" [class.content-overlay]="isSidebarOpen">
+    <router-outlet></router-outlet>
+  </div>
 </div>
