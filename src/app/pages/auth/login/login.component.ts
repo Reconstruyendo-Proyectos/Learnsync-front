@@ -2,11 +2,11 @@ import { Component, inject, OnInit } from '@angular/core';
 import { SidebarService } from '../../../sections/sidebar/service/sidebar.service';
 import { InputComponent } from "../../../components/input/input.component";
 import { ButtonComponent } from "../../../components/button/button.component";
-import { HoverStyleDirective } from '../../../directives/hover-style.directive';
+import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-login',
-  imports: [InputComponent, ButtonComponent],
+  imports: [InputComponent, ButtonComponent, RouterModule],
   templateUrl: './login.component.html',
   styleUrl: './login.component.css'
 })

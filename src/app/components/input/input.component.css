@@ -1,0 +1,8 @@
+input {
+    padding: 20px;
+    width: 20rem;
+}
+
+input:focus {
+    border: 1px solid #4d8094;
+}

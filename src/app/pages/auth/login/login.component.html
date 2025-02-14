@@ -1,8 +1,15 @@
 <div class="container">
-    <h1>Iniciar Sesión</h1>
-    <form class="form-login">
-        <app-input typeInput="text" placeholder="Usuario"/>
-        <app-input typeInput="password" placeholder="Contraseña"/>
-        <app-button text="Iniciar Sesión" padding="10px" width="100px" hoverColor = "#1f6f9b"/>
-    </form>
+    <div class="auth">
+        <h1>Iniciar Sesión</h1>
+        <form class="form-login">
+            <app-input typeInput="text" placeholder="Usuario" />
+            <app-input typeInput="password" placeholder="Contraseña" />
+            <app-button text="Iniciar Sesión" padding="20px" width="10rem" hoverColor="#1f6f9b" />
+        </form>
+        <p>¿Aún no tienes cuenta? <span class="url" routerLink="/register">Registrate aquí</span></p>
+        <p class="url" routerLink="/forgot-password">¿Olvidaste tu contraseña?</p>
+    </div>
+    <div class="image">
+        <img src="images/medico.webp" alt="Imagen profesional de un médico">
+    </div>
 </div>
