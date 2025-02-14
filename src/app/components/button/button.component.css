@@ -1,11 +1,5 @@
 button {
     margin-bottom: 10px;
-    background: #2889c5;
     color: #fff;
     font-weight: bold;
-    border-radius: 15px;
-}
-
-button:hover {
-    background: #1f6f9b;
 }

@@ -14,7 +14,6 @@ import { CommonModule } from '@angular/common';
 export class AppComponent implements OnInit {
   title = 'learnsync';
   isSidebarOpen = false;
-
   sidebarService = inject(SidebarService)
 
   ngOnInit(): void {
