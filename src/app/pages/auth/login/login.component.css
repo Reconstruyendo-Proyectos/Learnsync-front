@@ -1,21 +1,19 @@
 .container {
     display: flex;
-    align-items: stretch; /* Asegura que ambos elementos ocupen toda la altura */
+    align-items: stretch;
     justify-content: center;
-    gap: 20px; /* Espacio entre los elementos */
-    height: 100vh; /* Altura total de la pantalla */
+    gap: 20px;
 }
 
 .auth {
-    flex: 1; /* Ocupa el 60% del ancho */
+    flex: 1;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     gap: 10px;
-    background-color: #f9f9f9; /* Fondo para diferenciar el formulario */
     padding: 20px;
-    box-sizing: border-box; /* Incluye padding en el cálculo del tamaño */
+    box-sizing: border-box;
 }
 
 .form-login {
@@ -27,17 +25,17 @@
 }
 
 .image {
-    flex: 1; /* Ocupa el 40% del ancho */
+    flex: 1;
     display: flex;
-    align-items: center;
+    align-items: start;
     justify-content: center;
-    overflow: hidden; /* Evita que la imagen sobresalga del contenedor */
+    overflow: hidden;
 }
 
 .image img {
-    width: 100%; /* La imagen ocupa todo el ancho del contenedor */
-    height: auto; /* Mantiene la proporción de aspecto */
-    object-fit: cover; /* Asegura que la imagen cubra todo el espacio sin deformarse */
+    width: 100%;
+    height: 550px;
+    object-fit: cover;
 }
 
 p {
@@ -46,4 +44,8 @@ p {
 
 .url {
     cursor: pointer;
+}
+
+.url:hover {
+    color: #bebebe;
 }

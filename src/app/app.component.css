@@ -18,6 +18,12 @@
     margin-left: 0;
 }
 
+.content-overlay-wrapper.no-margin {
+    margin-left: 0 !important;
+    margin-top: 0 !important;
+    padding: 0;
+}
+
 @media (width > 768px) {
     .content-overlay-wrapper {
         margin-left: 10px;
