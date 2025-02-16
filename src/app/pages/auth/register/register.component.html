@@ -1,1 +1,21 @@
-<p>register works!</p>
+<div class="container">
+    <div class="auth">
+        <h1>Registrate</h1>
+        <form class="form-login">
+            <div class="register-inputs">
+                <app-input typeInput="text" placeholder="Usuario" />
+                <app-input typeInput="email" placeholder="Email" />
+                <app-input typeInput="password" placeholder="Contraseña" />
+            </div>
+            <app-button text="Registrate" padding="15px" width="10rem" hoverColor="#1f6f9b" (click)="openModal()" />
+        </form>
+        <p>¿Ya te has registrado? <span class="url" routerLink="/login">Inicia sesión aquí</span></p>
+    </div>
+    <div class="image" *ngIf="showImage">
+        <img src="images/medicos-conversando.webp" alt="Imagen profesional de un médico">
+    </div>
+</div>
+
+<app-modal [isVisible]="isModalVisible" title="Cuenta Registrada"
+    message="Tu cuenta ha sido registrada, revisa tu bandeja de entrada para activar tu cuenta. Si no encuentras el correo, intenta revisar en spam."
+    (close)="closeModal()" />

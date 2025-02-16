@@ -9,7 +9,7 @@
         <p>¿Aún no tienes cuenta? <span class="url" routerLink="/register">Registrate aquí</span></p>
         <p class="url" routerLink="/forgot-password">¿Olvidaste tu contraseña?</p>
     </div>
-    <div class="image">
+    <div class="image" *ngIf="showImage">
         <img src="images/medico.webp" alt="Imagen profesional de un médico">
     </div>
 </div>
