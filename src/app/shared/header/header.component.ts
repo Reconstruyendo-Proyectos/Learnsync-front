@@ -15,7 +15,7 @@ import { AuthButtonsComponent } from "../../sections/auth-buttons/auth-buttons.c
 export class HeaderComponent implements OnInit{
   isSidebarOpen = false;
   isSidebarVisible = false;
-  isAuthenticated = false;
+  isAuthenticated = true;
 
   sidebarService = inject(SidebarService);
 

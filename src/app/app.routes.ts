@@ -7,6 +7,7 @@ import { CategoriesComponent } from './pages/sidebar/categories/categories.compo
 import { LoginComponent } from './pages/auth/login/login.component';
 import { RegisterComponent } from './pages/auth/register/register.component';
 import { ForgotPasswordComponent } from './pages/auth/forgot-password/forgot-password.component';
+import { ProfileComponent } from './pages/profile/profile.component';
 
 export const routes: Routes = [
     { path: '', component: HomeComponent },
@@ -16,5 +17,6 @@ export const routes: Routes = [
     { path: 'categories', component: CategoriesComponent },
     { path: 'login', component: LoginComponent },
     { path: 'register', component: RegisterComponent },
-    { path: 'forgot-password', component: ForgotPasswordComponent }
+    { path: 'forgot-password', component: ForgotPasswordComponent },
+    { path: '{user}', component: ProfileComponent }
 ];

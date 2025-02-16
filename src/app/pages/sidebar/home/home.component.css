@@ -1,13 +1,11 @@
-main {
-    margin-left: 2rem;
-    margin-top: 3rem;
-}
-
 .post {
     display: flex;
     flex-direction: column;
-    align-items: center;
+    align-items: start;
+    width: 75%;
     padding: 20px 0;
+    padding-left: 20px;
+    cursor: pointer;
 }
 
 .post:hover {
@@ -29,7 +27,7 @@ main {
 .content {
     display: inherit;
     flex-direction: column;
-    align-items: center;
+    align-items: start;
 }
 
 #time {
