@@ -1,0 +1,52 @@
+img {
+    border-radius: 50%;
+    width: 100px;
+}
+
+.profile-container {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.profile {
+    display: flex;
+    gap: 10px;
+}
+
+.username-points {
+    display: flex;
+    flex-direction: column;
+    justify-content: end;
+    gap: 10px;
+    margin-bottom: 10px;
+}
+
+.username {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+.user {
+    font-size: 24px;
+}
+
+.edit {
+    cursor: pointer;
+}
+
+.edit:hover {
+    color: #B9B9B9;
+}
+
+.points {
+    font-weight: bold;
+    font-size: 20px;
+    display: flex;
+    gap: 5px;
+}
+
+span {
+    font-weight: 400;
+}

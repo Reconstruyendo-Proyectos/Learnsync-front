@@ -1,0 +1,18 @@
+.flashcards {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.flashcards-list {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+}
+
+@media (width < 768px) {
+    .flashcards-list {
+        display: flex;
+        flex-direction: column;
+    }
+}

@@ -1,0 +1,18 @@
+.prizes {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.prize-list {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+}
+
+@media (width < 768px) {
+    .prize-list {
+        display: flex;
+        flex-direction: column;
+    }
+}
