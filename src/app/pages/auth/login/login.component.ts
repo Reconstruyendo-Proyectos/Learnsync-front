@@ -1,9 +1,13 @@
+declare const google: any;
 import { Component, HostListener, inject, OnInit } from '@angular/core';
-import { SidebarService } from '../../../sections/sidebar/service/sidebar.service';
 import { InputComponent } from "../../../components/input/input.component";
 import { ButtonComponent } from "../../../components/button/button.component";
-import { RouterModule } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 import { NgIf } from '@angular/common';
+import { AuthApiService } from '../../../../api/auth/auth-api.service';
+import { StorageService } from '../../../../api/storage/storage.service';
+import { AuthResponseDTO } from '../../../../api/auth/interfaces/auth-interfaces';
+import { environment } from '../../../../environments/environment.development';
 
 @Component({
   selector: 'app-login',
@@ -11,11 +15,25 @@ import { NgIf } from '@angular/common';
   templateUrl: './login.component.html',
   styleUrl: './login.component.css'
 })
-export class LoginComponent implements OnInit{
+export class LoginComponent implements OnInit {
   showImage = true;
+  formError = '';
+  router = inject(Router);
+  authApiService = inject(AuthApiService);
+  storageService = inject(StorageService);
 
   ngOnInit() {
-      this.checkScreenWidth();
+    this.checkScreenWidth();
+    google.accounts.id.initialize({
+      client_id: environment.googleClientId,
+      callback: (res: any) => this.handleLogin(res)
+    });
+
+    google.accounts.id.renderButton(document.getElementById("google-btn"), {
+      size: 'large',
+      shape: 'rectangle',
+      width: 240,
+    });
   }
 
   @HostListener('window:resize', ['$event'])
@@ -25,6 +43,22 @@ export class LoginComponent implements OnInit{
 
   private checkScreenWidth(): void {
     this.showImage = window.innerWidth > 768;
+  }
+
+  private handleLogin(response: any) {
+    const payload = response.credential;
+    this.authApiService.getUserByToken(payload).subscribe({
+      next: (res: AuthResponseDTO) => {
+        this.storageService.setAuthData(res as AuthResponseDTO);
+        this.storageService.setLoginMethod('Google');
+      },
+      error: (error: any) => {
+        this.formError = error.error;
+      },
+      complete: () => {
+        this.router.navigateByUrl('/')
+      }
+    });
   }
 }
 

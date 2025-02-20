@@ -1,5 +1,5 @@
 import { NgIf } from '@angular/common';
-import { Component, HostListener } from '@angular/core';
+import { Component, HostListener, Input } from '@angular/core';
 import { RouterModule } from '@angular/router';
 
 @Component({
@@ -9,6 +9,9 @@ import { RouterModule } from '@angular/router';
   styleUrl: './notification-icon.component.css'
 })
 export class NotificationIconComponent {
+
+  @Input() image: string = "";
+
   isDropdownOpen = false;
 
   toggleDropdown(): void {

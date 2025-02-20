@@ -49,3 +49,7 @@ p {
 .url:hover {
     color: #bebebe;
 }
+
+.form-error {
+    color: #f50909;
+}

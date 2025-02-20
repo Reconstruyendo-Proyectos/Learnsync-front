@@ -5,6 +5,10 @@ import { SidebarService } from '../../sections/sidebar/service/sidebar.service';
 import { NgIf } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { AuthButtonsComponent } from "../../sections/auth-buttons/auth-buttons.component";
+import { UserApiService } from '../../../api/user/user-api.service';
+import { UserDTO } from '../../../api/user/interfaces/user-interfaces';
+import { StorageService } from '../../../api/storage/storage.service';
+import { AuthResponseDTO } from '../../../api/auth/interfaces/auth-interfaces';
 
 @Component({
   selector: 'app-header',
@@ -12,24 +16,76 @@ import { AuthButtonsComponent } from "../../sections/auth-buttons/auth-buttons.c
   templateUrl: './header.component.html',
   styleUrl: './header.component.css'
 })
-export class HeaderComponent implements OnInit{
+export class HeaderComponent implements OnInit {
   isSidebarOpen = false;
   isSidebarVisible = false;
   isAuthenticated = true;
 
+  username = "";
+  user: UserDTO = {
+    username: "",
+    email: "",
+    creationDate: new Date(),
+    banDate: new Date(),
+    points: 0,
+    profilePhoto: "",
+    role : {
+      roleName: ""
+    }
+  };
+
+  authResponse: AuthResponseDTO | null = null;
+
   sidebarService = inject(SidebarService);
+  userApiService = inject(UserApiService);
+  storageService = inject(StorageService);
 
   toggleSidebar(): void {
     this.sidebarService.toggleSidebar();
   }
 
   ngOnInit(): void {
+    this.checkSidebar();
+    this.getUsername();
+    this.loadData();
+    this.checkProfilePhoto();
+  }
+
+  private checkSidebar() {
     this.sidebarService.isOpen$.subscribe(isOpen => {
       this.isSidebarOpen = isOpen ?? false;
     });
 
     this.sidebarService.isVisible$.subscribe(isVisible => {
       this.isSidebarVisible = isVisible ?? false;
-    })
+    });
+  }
+
+  private checkProfilePhoto() {
+    if (this.user.profilePhoto === null || !this.user.profilePhoto) {
+      this.user.profilePhoto = "images/photo-profile-generic.webp";
+    }
+  }
+
+  private getUsername(){
+    this.authResponse = this.storageService.getAuthData();
+    this.username = this.authResponse?.user ?? "";
+    this.toSlug();
+  }
+
+  private toSlug() {
+    this.username = this.username.trim().replace(/\s+/g, '-');
+  }
+
+  private loadData() {
+    this.userApiService.getUser(this.username).subscribe({
+      next: (res: UserDTO) => {
+        this.user = res;
+      },
+      error: (error: any) => {
+        console.error(error);
+      }
+    });
+
   }
 }

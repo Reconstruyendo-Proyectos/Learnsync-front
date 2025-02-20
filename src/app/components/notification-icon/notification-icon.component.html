@@ -9,7 +9,7 @@
         </svg>
         <div class="notification-number"><span class="number">9+</span></div>
     </div>
-    <img class="profile" src="images/Photo Profile.jpg" alt="Foto de perfil" (click)="toggleDropdown()">
+    <img class="profile" src={{image}} alt="Foto de perfil" (click)="toggleDropdown()">
     <div class="dropdown" *ngIf="isDropdownOpen">
         <ul>
             <li routerLink="/jluyo">Mi Perfil</li>

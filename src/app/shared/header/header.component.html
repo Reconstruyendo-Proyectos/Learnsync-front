@@ -10,7 +10,7 @@
         </svg>
         <img class="logo" src="Logo.png" alt="Logo de Learnsync" routerLink = "/">
         <app-search-bar />
-        <app-notification-icon *ngIf="isAuthenticated"/>
+        <app-notification-icon [image] = "user.profilePhoto" *ngIf="isAuthenticated"/>
         <app-auth-buttons *ngIf="!isAuthenticated"/>
     </div>
 </header>
