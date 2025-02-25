@@ -21,6 +21,10 @@ export class StorageService {
     return localStorage.getItem('loginMethod');
   }
 
+  clearLoginMethod(): void {
+    return localStorage.removeItem('loginMethod');
+  }
+
   getAuthData(): AuthResponseDTO | null {
     const data = localStorage.getItem(this.authKey);
       return data ? (JSON.parse(data) as AuthResponseDTO) : null;

@@ -9,6 +9,7 @@ import { UserApiService } from '../../../api/user/user-api.service';
 import { UserDTO } from '../../../api/user/interfaces/user-interfaces';
 import { StorageService } from '../../../api/storage/storage.service';
 import { AuthResponseDTO } from '../../../api/auth/interfaces/auth-interfaces';
+import { AuthApiService } from '../../../api/auth/auth-api.service';
 
 @Component({
   selector: 'app-header',
@@ -19,7 +20,7 @@ import { AuthResponseDTO } from '../../../api/auth/interfaces/auth-interfaces';
 export class HeaderComponent implements OnInit {
   isSidebarOpen = false;
   isSidebarVisible = false;
-  isAuthenticated = true;
+  isAuthenticated = false;
 
   username = "";
   user: UserDTO = {
@@ -29,7 +30,7 @@ export class HeaderComponent implements OnInit {
     banDate: new Date(),
     points: 0,
     profilePhoto: "",
-    role : {
+    role: {
       roleName: ""
     }
   };
@@ -39,6 +40,7 @@ export class HeaderComponent implements OnInit {
   sidebarService = inject(SidebarService);
   userApiService = inject(UserApiService);
   storageService = inject(StorageService);
+  authApiService = inject(AuthApiService);
 
   toggleSidebar(): void {
     this.sidebarService.toggleSidebar();
@@ -46,9 +48,15 @@ export class HeaderComponent implements OnInit {
 
   ngOnInit(): void {
     this.checkSidebar();
-    this.getUsername();
-    this.loadData();
-    this.checkProfilePhoto();
+    this.authApiService.isAuthenticated$.subscribe(isAuth => {
+      this.isAuthenticated = isAuth ?? false;
+    });
+    if (this.isAuthenticated) {
+      console.log(this.isAuthenticated);
+      this.getUsername();
+      this.loadData();
+      this.checkProfilePhoto();
+    }
   }
 
   private checkSidebar() {
@@ -67,7 +75,7 @@ export class HeaderComponent implements OnInit {
     }
   }
 
-  private getUsername(){
+  private getUsername() {
     this.authResponse = this.storageService.getAuthData();
     this.username = this.authResponse?.user ?? "";
     this.toSlug();

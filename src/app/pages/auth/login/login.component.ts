@@ -6,21 +6,35 @@ import { Router, RouterModule } from '@angular/router';
 import { NgIf } from '@angular/common';
 import { AuthApiService } from '../../../../api/auth/auth-api.service';
 import { StorageService } from '../../../../api/storage/storage.service';
-import { AuthResponseDTO } from '../../../../api/auth/interfaces/auth-interfaces';
+import { AuthRequestDTO, AuthResponseDTO } from '../../../../api/auth/interfaces/auth-interfaces';
 import { environment } from '../../../../environments/environment.development';
+import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-login',
-  imports: [InputComponent, ButtonComponent, RouterModule, NgIf],
+  imports: [InputComponent, ButtonComponent, RouterModule, NgIf, ReactiveFormsModule],
   templateUrl: './login.component.html',
   styleUrl: './login.component.css'
 })
 export class LoginComponent implements OnInit {
   showImage = true;
   formError = '';
+
+  // Injects
   router = inject(Router);
   authApiService = inject(AuthApiService);
   storageService = inject(StorageService);
+  fb = inject(FormBuilder);
+
+  authRequest: AuthRequestDTO = {
+    username: '',
+    password: ''
+  }
+
+  loginForm = this.fb.group({
+    username: ['', Validators.required],
+    password: ['', Validators.required]
+  });
 
   ngOnInit() {
     this.checkScreenWidth();
@@ -43,6 +57,29 @@ export class LoginComponent implements OnInit {
 
   private checkScreenWidth(): void {
     this.showImage = window.innerWidth > 768;
+  }
+
+  login() {
+    if(this.loginForm.valid){
+      this.authRequest.username = this.loginForm.controls.username.value as string;
+      this.authRequest.password = this.loginForm.controls.password.value as string;
+      this.authApiService.login(this.authRequest).subscribe({
+        next: (res: AuthResponseDTO) => {
+          this.authApiService.validateLogin();
+          this.storageService.setAuthData(res as AuthResponseDTO);
+          this.storageService.setLoginMethod('Normal');
+        },
+        error: (error: any) => {
+          console.error(error);
+          this.formError = error.error;
+        },
+        complete: () => {
+          this.router.navigateByUrl('/')
+        }
+      });
+    } else {
+      this.loginForm.markAllAsTouched();
+    }
   }
 
   private handleLogin(response: any) {

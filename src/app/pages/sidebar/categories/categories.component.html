@@ -1,37 +1,13 @@
 <main>
     <h1>Categorías</h1>
 
-    <div class="category-container">
-        <h2>Ciclo I</h2>
+    <div class="category-container" *ngFor="let category of categories">
+        <h2>{{category.name}}</h2>
         <div class="topics">
-            <app-card-topics srcImage="fake-images/icon-list.webp" title="Biología Celular" nroComments="2.5k"
-                description="Tópico que almacena los hilos del curso de Biología Celular" />
-
-            <app-card-topics srcImage="fake-images/Icon-matematicas.webp" title="Matemáticas" nroComments="10.4k"
-                description="Tópico que almacena los hilos del curso de Matemáticas" />
-
-            <app-card-topics srcImage="fake-images/icon-quimica.webp" title="Química General" nroComments="800"
-                description="Tópico que almacena los hilos del curso de Química General" />
-
-            <app-card-topics srcImage="fake-images/icon-comunicacion.webp" title="Comunicación" nroComments="1.2k"
-                description="Tópico que almacena los hilos del curso de Comunicación" />
-
-            <app-card-topics srcImage="fake-images/icon-biofisica.webp" title="Biofísica Médica" nroComments="10.4k"
-                description="Tópico que almacena los hilos del curso de Biofísica Médica" />
-        </div>
-    </div>
-
-    <div class="category-container">
-        <h2>Ciclo II</h2>
-        <div class="topics">
-            <app-card-topics srcImage="fake-images/icon-excretor.webp" title="Sistema Excretor" nroComments="5k"
-                description="Tópico que almacena los hilos del curso de Sistema Excretor" />
-
-            <app-card-topics srcImage="fake-images/icon-locomotor.webp" title="Aparato Locomotor" nroComments="8.7k"
-                description="Tópico que almacena los hilos del curso de Aparato Locomotor" />
-
-            <app-card-topics srcImage="fake-images/icon-molecular.webp" title="Biología Molecular" nroComments="450"
-                description="Tópico que almacena los hilos del curso de Biología Molecular" />
+            <div *ngFor="let topic of category.topics">
+                <app-card-topics srcImage={{topic?.topicIcon}} title={{topic?.name}} nroComments={{topic?.threads?.length}}
+                description={{topic?.description}} />
+            </div>
         </div>
     </div>
 </main>

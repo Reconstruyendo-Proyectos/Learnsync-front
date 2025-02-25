@@ -1,11 +1,11 @@
 <div class="container">
     <div class="auth">
         <h1>Iniciar Sesión</h1>
-        <form class="form-login">
-            <app-input typeInput="text" placeholder="Usuario" />
-            <app-input typeInput="password" placeholder="Contraseña" />
+        <form [formGroup]="loginForm" class="form-login">
+            <app-input typeInput="text" placeholder="Usuario" formControlName="username"/>
+            <app-input typeInput="password" placeholder="Contraseña" formControlName="password"/>
             <label class="form-error" *ngIf="formError != ''">{{formError}}</label>
-            <app-button text="Iniciar Sesión" padding="10px" width="15rem" hoverColor="#1f6f9b" radius="0"/>
+            <app-button text="Iniciar Sesión" padding="10px" width="15rem" hoverColor="#1f6f9b" radius="0" (click)="login()"/>
             <button id="google-btn"></button>
         </form>
         <p>¿Aún no tienes cuenta? <span class="url" routerLink="/register">Registrate aquí</span></p>

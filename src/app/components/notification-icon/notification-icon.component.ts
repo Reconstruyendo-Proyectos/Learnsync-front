@@ -1,6 +1,8 @@
 import { NgIf } from '@angular/common';
-import { Component, HostListener, Input } from '@angular/core';
-import { RouterModule } from '@angular/router';
+import { Component, HostListener, inject, Input } from '@angular/core';
+import { Router, RouterModule } from '@angular/router';
+import { AuthApiService } from '../../../api/auth/auth-api.service';
+import { StorageService } from '../../../api/storage/storage.service';
 
 @Component({
   selector: 'app-notification-icon',
@@ -13,6 +15,10 @@ export class NotificationIconComponent {
   @Input() image: string = "";
 
   isDropdownOpen = false;
+
+  authApiService = inject(AuthApiService);
+  storageService = inject(StorageService);
+  router = inject(Router);
 
   toggleDropdown(): void {
     this.isDropdownOpen = !this.isDropdownOpen;
@@ -28,5 +34,12 @@ export class NotificationIconComponent {
     if (!profileContainer?.contains(event.target as Node)) {
       this.isDropdownOpen = false;
     }
+  }
+
+  logout() {
+    this.authApiService.logout();
+    this.storageService.clearAuthData();
+    this.storageService.clearLoginMethod();
+    this.router.navigate(['/login']);
   }
 }

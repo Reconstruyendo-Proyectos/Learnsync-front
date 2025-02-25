@@ -1,4 +1,4 @@
 <div class="input-container">
-    <input type={{typeInput}} placeholder="" id={{placeholder}}>
+    <input type={{typeInput}} [value]="value" (input)="onInputChange($event)" placeholder="" id={{placeholder}}>
     <label for={{placeholder}}>{{placeholder}}</label>
 </div>

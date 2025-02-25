@@ -15,8 +15,8 @@ export class AppComponent implements OnInit {
   title = 'learnsync';
   isSidebarOpen = false;
   isAuthRoute = false;
-  sidebarService = inject(SidebarService)
-  router = inject(Router)
+  sidebarService = inject(SidebarService);
+  router = inject(Router);
 
   ngOnInit(): void {
     this.sidebarService.isOpen$.subscribe(isOpen => {

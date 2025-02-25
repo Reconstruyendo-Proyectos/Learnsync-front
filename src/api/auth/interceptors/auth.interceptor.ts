@@ -9,9 +9,9 @@ export const authInterceptor: HttpInterceptorFn = (req, next) => {
 
   if(token) {
     const request = req.clone({
-      headers: req.headers.set('Authorization', loginMethod === 'Google' ? `Bearer ${token}` : `Google ${token}`)
+      headers: req.headers.set('Authorization', loginMethod === 'Google' ? `Google ${token}` : `Bearer ${token}`)
     });
-
+    console.log(request);
     return next(request);
   }
   return next(req);
