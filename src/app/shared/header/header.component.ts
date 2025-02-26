@@ -48,14 +48,19 @@ export class HeaderComponent implements OnInit {
 
   ngOnInit(): void {
     this.checkSidebar();
+    this.checkAuthentication();
     this.authApiService.isAuthenticated$.subscribe(isAuth => {
-      this.isAuthenticated = isAuth ?? false;
+      this.isAuthenticated = isAuth;
     });
     if (this.isAuthenticated) {
-      console.log(this.isAuthenticated);
       this.getUsername();
       this.loadData();
-      this.checkProfilePhoto();
+    }
+  }
+
+  private checkAuthentication() {
+    if(this.storageService.getAuthData()) {
+      this.authApiService.validateLogin();
     }
   }
 
@@ -71,7 +76,7 @@ export class HeaderComponent implements OnInit {
 
   private checkProfilePhoto() {
     if (this.user.profilePhoto === null || !this.user.profilePhoto) {
-      this.user.profilePhoto = "images/photo-profile-generic.webp";
+      this.user.profilePhoto = "https://picsum.photos/64/64?random=15";
     }
   }
 
@@ -92,8 +97,10 @@ export class HeaderComponent implements OnInit {
       },
       error: (error: any) => {
         console.error(error);
+      },
+      complete: () => {
+        this.checkProfilePhoto();
       }
     });
-
   }
 }
