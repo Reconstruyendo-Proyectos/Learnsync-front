@@ -20,5 +20,5 @@ export const routes: Routes = [
     { path: 'register', component: RegisterComponent },
     { path: 'forgot-password', component: ForgotPasswordComponent },
     { path: ':username', component: ProfileComponent },
-    { path: 'topic/:topic', component: TopicComponent},
+    { path: 'topic/:slug', component: TopicComponent},
 ];

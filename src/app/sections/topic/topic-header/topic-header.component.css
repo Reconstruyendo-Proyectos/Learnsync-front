@@ -1,0 +1,20 @@
+.topic-header {
+  position: relative;
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.topic-info {
+  position: absolute;
+  bottom: 16px;
+  left: 16px;
+  display: flex;
+  align-items: center;
+}
+
+app-button {
+  position: absolute;
+  bottom: 16px;
+  right: 16px;
+}
