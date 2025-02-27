@@ -6,7 +6,7 @@
         <div class="topics">
             <div *ngFor="let topic of category.topics">
                 <app-card-topics srcImage={{topic?.topicIcon}} title={{topic?.name}} nroComments={{topic?.threads?.length}}
-                description={{topic?.description}} />
+                description={{topic?.description}} slug="{{topic?.slug}}"/>
             </div>
         </div>
     </div>

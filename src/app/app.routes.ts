@@ -8,6 +8,7 @@ import { LoginComponent } from './pages/auth/login/login.component';
 import { RegisterComponent } from './pages/auth/register/register.component';
 import { ForgotPasswordComponent } from './pages/auth/forgot-password/forgot-password.component';
 import { ProfileComponent } from './pages/profile/profile.component';
+import { TopicComponent } from './pages/topic/topic.component';
 
 export const routes: Routes = [
     { path: '', component: HomeComponent },
@@ -18,5 +19,6 @@ export const routes: Routes = [
     { path: 'login', component: LoginComponent },
     { path: 'register', component: RegisterComponent },
     { path: 'forgot-password', component: ForgotPasswordComponent },
-    { path: ':username', component: ProfileComponent }
+    { path: ':username', component: ProfileComponent },
+    { path: 'topic/:topic', component: TopicComponent},
 ];

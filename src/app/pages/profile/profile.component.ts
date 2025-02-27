@@ -1,7 +1,7 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { ActivatedRoute, RouterModule } from '@angular/router';
-import { PrizeSectionComponent } from '../../sections/prize-section/prize-section.component';
-import { FlashcardsSectionComponent } from '../../sections/flashcards-section/flashcards-section.component';
+import { PrizeSectionComponent } from '../../sections/profile/prize-section/prize-section.component';
+import { FlashcardsSectionComponent } from '../../sections/profile/flashcards-section/flashcards-section.component';
 import { UserApiService } from '../../../api/user/user-api.service';
 import { UserDTO } from '../../../api/user/interfaces/user-interfaces';
 

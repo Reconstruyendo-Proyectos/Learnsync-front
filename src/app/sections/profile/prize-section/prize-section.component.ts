@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { TemplateCardProfileComponent } from '../../components/template-card-profile/template-card-profile.component';
+import { TemplateCardProfileComponent } from '../../../components/template-card-profile/template-card-profile.component';
 
 @Component({
   selector: 'app-prize-section',
