@@ -3,10 +3,11 @@ import { TopicHeaderComponent } from "../../sections/topic/topic-header/topic-he
 import { ActivatedRoute } from '@angular/router';
 import { TopicApiService } from '../../../api/topic/topic-api.service';
 import { Topic } from '../../../api/topic/interfaces/topic-interfaces';
+import { PostListComponent } from "../../sections/post-list/post-list.component";
 
 @Component({
   selector: 'app-topic',
-  imports: [TopicHeaderComponent],
+  imports: [TopicHeaderComponent, PostListComponent],
   templateUrl: './topic.component.html',
   styleUrl: './topic.component.css'
 })
