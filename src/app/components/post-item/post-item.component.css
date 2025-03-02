@@ -61,7 +61,7 @@
 .footer-post {
   display: flex;
   align-items: center;
-  gap: 2rem;
+  gap: 1.5rem;
   margin-top: 15px;
 }
 
@@ -71,28 +71,35 @@ button {
   cursor: pointer;
   display: flex;
   align-items: center;
-  gap: 5px;
 }
 
-.icon-count svg {
-  width: 24px;
-  height: 24px;
+.icon {
+  width: 20px;
+  height: 20px;
   fill: #888;
+  transition: fill 0.3s ease;
 }
 
-.icon-count .count {
+.icon-count {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.count {
   font-size: 14px;
   color: #888;
+  transition: color 0.3s ease;
 }
 
-#like:hover {
+button:hover .icon {
   fill: #004ef8;
 }
 
-#star:hover {
+button:nth-child(2):hover .icon {
   fill: #ffd700;
 }
 
-#comment:hover {
+button:nth-child(3):hover .icon {
   fill: #4bc300;
 }

@@ -7,4 +7,6 @@ export interface Thread {
     creationDate: Date;
     user: UserDTO;
     comments: Comment[];
+    likes: number;
+    stars: number;
 }
