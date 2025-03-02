@@ -1,10 +1,11 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Thread } from '../../../api/threads/interfaces/thread-interfaces';
 import { Temporal } from 'temporal-polyfill';
+import { NgIf } from '@angular/common';
 
 @Component({
   selector: 'app-post-item',
-  imports: [],
+  imports: [NgIf],
   templateUrl: './post-item.component.html',
   styleUrl: './post-item.component.css'
 })
@@ -80,5 +81,15 @@ export class PostItemComponent implements OnInit {
   onComments(): void {
     console.log(`Viendo comentarios del post`);
     // Lógica para navegar a la página de comentarios
+  }
+
+  getMediaType(): string {
+    if (this.thread.file.match(/\.(jpeg|jpg|png|gif)$/i)) {
+      return 'image'; // Es una imagen
+    } else if (this.thread.file.match(/\.(mp4|mov|avi)$/i)) {
+      return 'direct-video'; // Es un video directo
+    } else {
+      return 'unknown'; // Tipo desconocido
+    }
   }
 }

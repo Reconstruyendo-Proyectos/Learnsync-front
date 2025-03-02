@@ -9,4 +9,5 @@ export interface Thread {
     comments: Comment[];
     likes: number;
     stars: number;
+    file: string;
 }

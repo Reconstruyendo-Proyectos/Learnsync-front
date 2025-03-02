@@ -103,3 +103,17 @@ button:nth-child(2):hover .icon {
 button:nth-child(3):hover .icon {
   fill: #4bc300;
 }
+
+.media-image {
+  max-width: 100%;
+  height: auto;
+  border-radius: 8px;
+  margin-top: 10px;
+}
+
+.media-video {
+  width: 100%;
+  max-height: 400px;
+  border-radius: 8px;
+  margin-top: 10px;
+}
