@@ -1,3 +1,3 @@
 <div class="post-list">
-    <app-post-item *ngFor="let thread of threads" [thread]="thread" [topic]="topic"></app-post-item>
+    <app-post-item *ngFor="let thread of threads" [thread]="thread" [topic]="topic" [routerLink]="getUrl(thread)"/>
 </div>

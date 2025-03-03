@@ -6,7 +6,7 @@
             <span>{{ thread.user.username }}</span>
             <span>-</span>
             <span id="time">{{ publicationDate }}</span>
-            <span>-</span>
+            <span *ngIf="topic !== ''">-</span>
             <span id="topic">{{ topic }}</span>
         </div>
     </div>
@@ -15,7 +15,7 @@
     <div class="title">
         <h1>{{ thread.title }}</h1>
     </div>
-    <div class="content">
+    <div *ngIf="!thread.file" class="content">
         <p>{{ thread.message }}</p>
     </div>
 

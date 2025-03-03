@@ -4,6 +4,8 @@ import { ActivatedRoute } from '@angular/router';
 import { TopicApiService } from '../../../api/topic/topic-api.service';
 import { Topic } from '../../../api/topic/interfaces/topic-interfaces';
 import { PostListComponent } from "../../sections/post-list/post-list.component";
+import { Thread } from '../../../api/threads/interfaces/thread-interfaces';
+import { ThreadApiService } from '../../../api/threads/thread-api.service';
 
 @Component({
   selector: 'app-topic',
@@ -14,9 +16,12 @@ import { PostListComponent } from "../../sections/post-list/post-list.component"
 export class TopicComponent implements OnInit{
   topicSlug!: string;
   topic!: Topic;
+  threads!: Thread[];
+  page: number = 0;
 
   activatedRouter = inject(ActivatedRoute);
   topicApiService = inject(TopicApiService);
+  threadApiService = inject(ThreadApiService);
 
   ngOnInit(): void {
     this.activatedRouter.params.subscribe(params => {
@@ -28,6 +33,9 @@ export class TopicComponent implements OnInit{
   private loadData() {
     this.topicApiService.getTopic(this.topicSlug).subscribe((topic: Topic) => {
       this.topic = topic;
+    });
+    this.threadApiService.listThreadsByCreationDate(this.topicSlug, this.page).subscribe((threads: Thread[]) => {
+      this.threads = threads;
     });
   }
 }

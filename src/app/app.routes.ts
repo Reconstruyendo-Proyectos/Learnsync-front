@@ -9,6 +9,7 @@ import { RegisterComponent } from './pages/auth/register/register.component';
 import { ForgotPasswordComponent } from './pages/auth/forgot-password/forgot-password.component';
 import { ProfileComponent } from './pages/profile/profile.component';
 import { TopicComponent } from './pages/topic/topic.component';
+import { ThreadPageComponent } from './pages/thread-page/thread-page.component';
 
 export const routes: Routes = [
     { path: '', component: HomeComponent },
@@ -21,4 +22,5 @@ export const routes: Routes = [
     { path: 'forgot-password', component: ForgotPasswordComponent },
     { path: ':username', component: ProfileComponent },
     { path: 'topic/:slug', component: TopicComponent},
+    { path: 'thread/:id', component: ThreadPageComponent}
 ];
