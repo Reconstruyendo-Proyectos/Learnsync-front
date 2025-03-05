@@ -53,7 +53,6 @@ export class HeaderComponent implements OnInit {
       this.isAuthenticated = isAuth;
     });
     if (this.isAuthenticated) {
-      this.getUsername();
       this.loadData();
     }
   }
@@ -80,18 +79,8 @@ export class HeaderComponent implements OnInit {
     }
   }
 
-  private getUsername() {
-    this.authResponse = this.storageService.getAuthData();
-    this.username = this.authResponse?.user ?? "";
-    this.toSlug();
-  }
-
-  private toSlug() {
-    this.username = this.username.trim().replace(/\s+/g, '-');
-  }
-
   private loadData() {
-    this.userApiService.getUser(this.username).subscribe({
+    this.userApiService.getAuthenticatedUser().subscribe({
       next: (res: UserDTO) => {
         this.user = res;
       },

@@ -1,13 +1,13 @@
-import { UserDTO } from "../../user/interfaces/user-interfaces";
-
 export interface Thread {
     idThread: number;
     title: string;
     message: string;
     creationDate: Date;
-    user: UserDTO;
-    comments: Comment[];
+    username: string;
+    profilePhoto: string;
     likes: number;
     stars: number;
     file: string;
+    topicName: string;
+    nroComments: number;
 }

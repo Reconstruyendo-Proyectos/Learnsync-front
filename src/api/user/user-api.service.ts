@@ -12,7 +12,7 @@ export class UserApiService {
   httpClient = inject(HttpClient);
   baseUrl = `${environment.urlBackend}/user`;
 
-  getUser(username: string): Observable<any> {
-    return this.httpClient.get<UserDTO>(`${this.baseUrl}/get-user/${username}`);
+  getAuthenticatedUser(): Observable<any> {
+    return this.httpClient.get<UserDTO>(`${this.baseUrl}/get-authenticated-user/`);
   }
 }

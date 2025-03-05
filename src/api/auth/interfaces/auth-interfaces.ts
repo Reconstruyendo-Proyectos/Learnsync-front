@@ -4,7 +4,5 @@ export interface AuthRequestDTO {
 }
 
 export interface AuthResponseDTO {
-    user: string,
-    role: string,
     token: string
 }

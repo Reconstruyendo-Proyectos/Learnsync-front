@@ -5,8 +5,8 @@
         <h2>{{category.name}}</h2>
         <div class="topics">
             <div *ngFor="let topic of category.topics">
-                <app-card-topics srcImage={{topic?.topicIcon}} title={{topic?.name}} nroComments={{topic?.threads?.length}}
-                description={{topic?.description}} slug="{{topic?.slug}}"/>
+                <app-card-topics srcImage={{topic?.topicIcon}} title={{topic?.name}} nroComments={{topic?.nroThreads}}
+                    description={{topic?.description}} slug="{{topic?.slug}}" />
             </div>
         </div>
     </div>

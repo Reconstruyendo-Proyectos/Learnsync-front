@@ -15,28 +15,14 @@ export class ProfileComponent implements OnInit {
   route = inject(ActivatedRoute);
   userApiService = inject(UserApiService);
 
-  username = '';
-  user: UserDTO = {
-    username: "",
-    email: "",
-    creationDate: new Date(),
-    banDate: new Date(),
-    points: 0,
-    profilePhoto: "",
-    role: {
-      roleName: ""
-    }
-  };
+  user!: UserDTO;
 
   ngOnInit() {
-    this.route.params.subscribe(params => {
-      this.username = params['username'];
-    })
     this.loadData();
   }
 
   private loadData() {
-    this.userApiService.getUser(this.username).subscribe({
+    this.userApiService.getAuthenticatedUser().subscribe({
       next: (res: UserDTO) => {
         this.user = res;
       },

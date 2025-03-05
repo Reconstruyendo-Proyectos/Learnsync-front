@@ -1,5 +1,3 @@
-import { Thread } from "../../threads/interfaces/thread-interfaces";
-
 export interface Topic {
     idTopic: number;
     name: string;
@@ -7,5 +5,5 @@ export interface Topic {
     slug: number;
     topicIcon: string;
     topicPoster: string;
-    threads: Thread[];
+    nroThreads: number;
 }

@@ -20,8 +20,8 @@ export class PostItemComponent implements OnInit {
   }
 
   private checkImage() {
-    if(this.thread.user.profilePhoto === null || this.thread.user.profilePhoto === undefined) {
-      this.thread.user.profilePhoto = "images/photo-profile-generic.webp";
+    if(this.thread.profilePhoto === null || this.thread.profilePhoto === undefined) {
+      this.thread.profilePhoto = "images/photo-profile-generic.webp";
     }
   }
 
@@ -80,16 +80,15 @@ export class PostItemComponent implements OnInit {
 
   onComments(): void {
     console.log(`Viendo comentarios del post`);
-    // Lógica para navegar a la página de comentarios
   }
 
   getMediaType(): string {
     if (this.thread.file.match(/\.(jpeg|jpg|png|gif)$/i)) {
-      return 'image'; // Es una imagen
+      return 'image';
     } else if (this.thread.file.match(/\.(mp4|mov|avi)$/i)) {
-      return 'direct-video'; // Es un video directo
+      return 'direct-video';
     } else {
-      return 'unknown'; // Tipo desconocido
+      return 'unknown';
     }
   }
 }

@@ -16,6 +16,10 @@ export class CategoriesComponent implements OnInit{
   page: number = 0
 
   ngOnInit(): void {
+    this.loadData();
+  }
+
+  private loadData() {
     this.categoryApiService.getCategories(this.page).subscribe((response) => {
       this.categories = response;
     });

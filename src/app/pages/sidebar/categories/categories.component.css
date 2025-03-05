@@ -8,15 +8,15 @@
     flex-wrap: wrap;
 }
 
-h2 {
-    margin-bottom: 20px;
-}
-
 h1 {
     letter-spacing: 1.5px;
 }
 
-@media (width <= 768px) {
+h2 {
+    margin-bottom: 15px;
+}
+
+@media (width <=768px) {
     .topics {
         justify-content: center;
     }
