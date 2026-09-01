@@ -1,13 +1,13 @@
 <h1>{{h1}}</h1>
 <div class="about-container">
     <div class="about-left">
-        <p *ngFor="let p of pList1">{{p}}</p>
+        @for (p of pList1; track p) { <p>{{p}}</p> }
         <ul class="list-benefits">
-            <li *ngFor="let item of list">{{item}}</li>
+            @for (item of list; track item) { <li>{{item}}</li> }
         </ul>
-        <p *ngFor="let p of pList2">{{p}}</p>
+        @for (p of pList2; track p) { <p>{{p}}</p> }
     </div>
     <div class="about-right about-image">
-        <img class="image" src={{srcImage}} alt={{altText}}>
+        <img class="image" [src]="srcImage" [alt]="altText">
     </div>
 </div>

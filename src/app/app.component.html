@@ -2,10 +2,9 @@
 <app-toast></app-toast>
 
 <div class="body">
-  <app-sidebar 
-    *ngIf="sidebarService.isSidebarVisible()" 
-    [open]="isSidebarOpen">
-  </app-sidebar>
+  @if (sidebarService.isSidebarVisible()) {
+    <app-sidebar [open]="isSidebarOpen"></app-sidebar>
+  }
 
   <div class="content-overlay-wrapper" [class.content-overlay]="isSidebarOpen" [class.no-margin]="isAuthRoute">
     <router-outlet></router-outlet>

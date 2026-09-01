@@ -1,9 +1,8 @@
 import { ChangeDetectionStrategy, Component, computed, input } from '@angular/core';
-import { NgIf } from '@angular/common';
 
 @Component({
   selector: 'app-template-card-profile',
-  imports: [NgIf],
+  imports: [],
   templateUrl: './template-card-profile.component.html',
   styleUrl: './template-card-profile.component.css',
   changeDetection: ChangeDetectionStrategy.OnPush,

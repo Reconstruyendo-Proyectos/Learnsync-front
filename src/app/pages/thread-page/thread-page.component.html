@@ -1,1 +1,52 @@
-<p>thread-page works!</p>
+@if (loading()) {
+  <div class="loading">Cargando hilo…</div>
+} @else {
+  @if (thread(); as t) {
+  <div class="thread-page">
+    <!-- Hilo principal -->
+    <article class="thread-card">
+      <div class="thread-header">
+        <img [src]="t.profilePhoto || 'images/photo-profile-generic.webp'" alt="avatar" class="avatar">
+        <span class="username">{{ t.username }}</span>
+        <span class="dot">•</span>
+        <span class="time">{{ formatDate(t.creationDate) }}</span>
+        <span class="topic-tag">{{ t.topicName }}</span>
+      </div>
+      <h1 class="title">{{ t.title }}</h1>
+      <p class="message">{{ t.message }}</p>
+      @if (t.file) {
+        <img [src]="t.file" alt="media" class="media">
+      }
+      <div class="thread-stats">
+        <span>{{ t.likes }} likes</span>
+        <span>{{ t.stars }} stars</span>
+        <span>{{ t.nroComments }} comentarios</span>
+      </div>
+    </article>
+
+    <!-- Composer -->
+    <div class="comment-composer">
+      <textarea [value]="newMessage()" (input)="newMessage.set($any($event.target).value)" placeholder="Escribe un comentario…" rows="3"></textarea>
+      <button class="btn-comment" (click)="submitComment()" [disabled]="!newMessage().trim()">Comentar</button>
+    </div>
+
+    <!-- Lista comentarios -->
+    <div class="comments">
+      @for (c of comments(); track c.idComment) {
+        <div class="comment-card">
+          <div class="comment-header">
+            <img [src]="c.user.profilePhoto || 'https://picsum.photos/64/64?random=15'" alt="avatar" class="avatar-sm">
+            <span class="username">{{ c.user.username }}</span>
+            <span class="time">{{ formatDate(c.creationDate) }}</span>
+          </div>
+          <p class="comment-message">{{ c.message }}</p>
+        </div>
+      } @empty {
+        <p class="empty">Sé el primero en comentar.</p>
+      }
+    </div>
+  </div>
+  } @else {
+    <div class="empty">Hilo no encontrado.</div>
+  }
+}

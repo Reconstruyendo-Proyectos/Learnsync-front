@@ -1,13 +1,12 @@
 import { ChangeDetectionStrategy, Component, DestroyRef, inject, OnInit } from '@angular/core';
 import { CardTopicsComponent } from '../../../components/card-topics/card-topics.component';
 import { CategoryApiService } from '../../../../api/category/category-api.service';
-import { NgFor } from '@angular/common';
 import { Category } from '../../../../api/category/interfaces/category-interfaces';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 @Component({
   selector: 'app-categories',
-  imports: [CardTopicsComponent, NgFor],
+  imports: [CardTopicsComponent],
   templateUrl: './categories.component.html',
   styleUrl: './categories.component.css',
   changeDetection: ChangeDetectionStrategy.OnPush,

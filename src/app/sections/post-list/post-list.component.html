@@ -1,3 +1,7 @@
 <div class="post-list">
-    <app-post-item *ngFor="let thread of threads" [thread]="thread" [topic]="topic" [routerLink]="getUrl(thread)"/>
+    @for (thread of threads(); track thread.idThread) {
+        <app-post-item [thread]="thread" [topic]="topic()" [routerLink]="getUrl(thread)"/>
+    } @empty {
+        <div class="empty">No hay posts aún.</div>
+    }
 </div>

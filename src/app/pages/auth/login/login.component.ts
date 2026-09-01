@@ -3,7 +3,6 @@ import { Component, HostListener, inject, OnInit } from '@angular/core';
 import { InputComponent } from "../../../components/input/input.component";
 import { ButtonComponent } from "../../../components/button/button.component";
 import { Router, RouterModule } from '@angular/router';
-import { NgIf } from '@angular/common';
 import { AuthApiService } from '../../../../api/auth/auth-api.service';
 import { StorageService } from '../../../../api/storage/storage.service';
 import { AuthRequestDTO, AuthResponseDTO } from '../../../../api/auth/interfaces/auth-interfaces';
@@ -12,7 +11,7 @@ import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-login',
-  imports: [InputComponent, ButtonComponent, RouterModule, NgIf, ReactiveFormsModule],
+  imports: [InputComponent, ButtonComponent, RouterModule, ReactiveFormsModule],
   templateUrl: './login.component.html',
   styleUrl: './login.component.css'
 })

@@ -6,8 +6,10 @@
             <span>{{ thread().username }}</span>
             <span>-</span>
             <span id="time">{{ publicationDate }}</span>
-            <span *ngIf="topic() !== ''">-</span>
-            <span id="topic">{{ topic() }}</span>
+            @if (topic() !== '') {
+              <span>-</span>
+              <span id="topic">{{ topic() }}</span>
+            }
         </div>
     </div>
 
@@ -15,26 +17,22 @@
     <div class="title">
         <h1>{{ thread().title }}</h1>
     </div>
-    <div *ngIf="!thread().file" class="content">
-        <p>{{ thread().message }}</p>
-    </div>
-
-    <div *ngIf="thread().file">
-        <div *ngIf="getMediaType() === 'image'">
-            <!-- Mostrar imagen -->
-            <img [src]="thread().file" alt="Imagen adjunta" class="media-image">
-        </div>
-        <div *ngIf="getMediaType() === 'direct-video'">
-            <!-- Mostrar video directo -->
-            <video controls class="media-video">
-                <source [src]="thread().file" type="video/mp4">
-                Tu navegador no soporta videos.
-            </video>
-        </div>
-        <div *ngIf="getMediaType() === 'unknown'">
-            <p>Tipo de archivo no soportado.</p>
-        </div>
-    </div>
+    @if (!thread().file) {
+      <div class="content">
+          <p>{{ thread().message }}</p>
+      </div>
+    } @else {
+      @if (getMediaType() === 'image') {
+          <img [src]="thread().file" alt="Imagen adjunta" class="media-image">
+      } @else if (getMediaType() === 'direct-video') {
+          <video controls class="media-video">
+              <source [src]="thread().file" type="video/mp4">
+              Tu navegador no soporta videos.
+          </video>
+      } @else {
+          <p>Tipo de archivo no soportado.</p>
+      }
+    }
 
     <!-- Footer -->
     <div class="footer-post">

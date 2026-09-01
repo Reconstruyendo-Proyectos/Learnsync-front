@@ -2,12 +2,11 @@ import { Component, HostListener } from '@angular/core';
 import { ButtonComponent } from "../../../components/button/button.component";
 import { InputComponent } from "../../../components/input/input.component";
 import { RouterModule } from '@angular/router';
-import { NgIf } from '@angular/common';
-import { ModalComponent } from "../../../components/modal/modal.component";
+import { ModalComponent } from '../../../components/modal/modal.component';
 
 @Component({
   selector: 'app-forgot-password',
-  imports: [ButtonComponent, InputComponent, RouterModule, NgIf, ModalComponent],
+  imports: [ButtonComponent, InputComponent, RouterModule, ModalComponent],
   templateUrl: './forgot-password.component.html',
   styleUrl: './forgot-password.component.css'
 })

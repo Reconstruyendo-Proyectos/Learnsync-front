@@ -1,5 +1,4 @@
 import { ChangeDetectionStrategy, Component, DestroyRef, inject, OnInit, signal } from '@angular/core';
-import { NgFor, NgIf } from '@angular/common';
 import { PrizeApiService, Prize } from '../../../../api/prize/prize-api.service';
 import { UserApiService } from '../../../../api/user/user-api.service';
 import { NotificationService } from '../../../core/services/notification.service';
@@ -7,7 +6,7 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 @Component({
   selector: 'app-prize-section',
-  imports: [NgFor, NgIf],
+  imports: [],
   templateUrl: './prize-section.component.html',
   styleUrl: './prize-section.component.css',
   changeDetection: ChangeDetectionStrategy.OnPush,

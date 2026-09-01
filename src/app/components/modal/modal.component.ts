@@ -1,12 +1,11 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
-import { ButtonComponent } from "../button/button.component";
-import { NgIf } from '@angular/common';
+import { ButtonComponent } from '../button/button.component';
 
 @Component({
   selector: 'app-modal',
   templateUrl: './modal.component.html',
   styleUrls: ['./modal.component.css'],
-  imports: [ButtonComponent, NgIf]
+  imports: [ButtonComponent]
 })
 export class ModalComponent {
   @Input() isVisible = false;

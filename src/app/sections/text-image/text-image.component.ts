@@ -1,9 +1,8 @@
-import { NgFor } from '@angular/common';
 import { Component, Input } from '@angular/core';
 
 @Component({
   selector: 'app-text-image',
-  imports: [NgFor],
+  imports: [],
   templateUrl: './text-image.component.html',
   styleUrl: './text-image.component.css'
 })

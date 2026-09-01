@@ -1,4 +1,3 @@
-import { NgIf } from '@angular/common';
 import { Component, HostListener, inject, Input } from '@angular/core';
 import { Router, RouterModule } from '@angular/router';
 import { AuthApiService } from '../../../api/auth/auth-api.service';
@@ -6,7 +5,7 @@ import { StorageService } from '../../../api/storage/storage.service';
 
 @Component({
   selector: 'app-notification-icon',
-  imports: [NgIf, RouterModule],
+  imports: [RouterModule],
   templateUrl: './notification-icon.component.html',
   styleUrl: './notification-icon.component.css'
 })

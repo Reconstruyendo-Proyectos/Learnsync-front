@@ -11,9 +11,11 @@
         </form>
         <p>¿Ya te has registrado? <span class="url" routerLink="/login">Inicia sesión aquí</span></p>
     </div>
-    <div class="image" *ngIf="showImage">
-        <img src="images/medicos-conversando.webp" alt="Imagen de médicos conversando">
-    </div>
+    @if (showImage) {
+      <div class="image">
+          <img src="images/medicos-conversando.webp" alt="Imagen de médicos conversando">
+      </div>
+    }
 </div>
 
 <app-modal [isVisible]="isModalVisible" title="Cuenta Registrada"

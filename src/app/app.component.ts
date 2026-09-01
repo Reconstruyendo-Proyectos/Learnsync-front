@@ -3,14 +3,13 @@ import { NavigationEnd, Router, RouterOutlet } from '@angular/router';
 import { HeaderComponent } from './shared/header/header.component';
 import { SidebarComponent } from './sections/sidebar/sidebar.component';
 import { SidebarService } from './sections/sidebar/service/sidebar.service';
-import { CommonModule } from '@angular/common';
 import { ToastComponent } from './shared/toast/toast.component';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { filter } from 'rxjs';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet, HeaderComponent, SidebarComponent, CommonModule, ToastComponent],
+  imports: [RouterOutlet, HeaderComponent, SidebarComponent, ToastComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css',
   changeDetection: ChangeDetectionStrategy.OnPush,

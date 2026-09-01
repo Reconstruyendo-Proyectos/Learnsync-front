@@ -1,11 +1,10 @@
 import { ChangeDetectionStrategy, Component, computed, input, OnInit } from '@angular/core';
 import { Thread } from '../../../api/threads/interfaces/thread-interfaces';
 import { Temporal } from 'temporal-polyfill';
-import { NgIf } from '@angular/common';
 
 @Component({
   selector: 'app-post-item',
-  imports: [NgIf],
+  imports: [],
   templateUrl: './post-item.component.html',
   styleUrl: './post-item.component.css',
   changeDetection: ChangeDetectionStrategy.OnPush,

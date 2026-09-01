@@ -1,7 +1,9 @@
-<div class="modal-overlay" *ngIf="isVisible">
-    <div class="modal-content">
-      <h2>{{ title }}</h2>
-      <p>{{ message }}</p>
-      <app-button text="Cerrar" padding="15px" width="10rem" hoverColor="#1f6f9b" (click)="closeModal()"/>
-    </div>
-</div>
+@if (isVisible) {
+  <div class="modal-overlay">
+      <div class="modal-content">
+        <h2>{{ title }}</h2>
+        <p>{{ message }}</p>
+        <app-button text="Cerrar" padding="15px" width="10rem" hoverColor="#1f6f9b" (click)="closeModal()"/>
+      </div>
+  </div>
+}

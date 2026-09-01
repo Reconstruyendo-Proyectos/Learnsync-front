@@ -9,13 +9,15 @@
         </svg>
         <div class="notification-number"><span class="number">9+</span></div>
     </div>
-    <img class="profile" src={{image}} alt="Foto de perfil" (click)="toggleDropdown()">
-    <div class="dropdown" *ngIf="isDropdownOpen">
-        <ul>
-            <li routerLink="/jluyo">Mi Perfil</li>
-            <li>Canjear Puntos</li>
-            <li>Modo Oscuro</li>
-            <li (click)="logout()">Cerrar Sesión</li>
-        </ul>
-    </div>
+    <img class="profile" [src]="image" alt="Foto de perfil" (click)="toggleDropdown()">
+    @if (isDropdownOpen) {
+      <div class="dropdown">
+          <ul>
+              <li routerLink="/jluyo">Mi Perfil</li>
+              <li>Canjear Puntos</li>
+              <li>Modo Oscuro</li>
+              <li (click)="logout()">Cerrar Sesión</li>
+          </ul>
+      </div>
+    }
 </div>

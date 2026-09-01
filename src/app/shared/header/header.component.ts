@@ -2,7 +2,6 @@ import { ChangeDetectionStrategy, Component, DestroyRef, inject, OnInit } from '
 import { SearchBarComponent } from '../../components/search-bar/search-bar.component';
 import { NotificationIconComponent } from '../../components/notification-icon/notification-icon.component';
 import { SidebarService } from '../../sections/sidebar/service/sidebar.service';
-import { NgIf } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { AuthButtonsComponent } from '../../sections/auth-buttons/auth-buttons.component';
 import { UserApiService } from '../../../api/user/user-api.service';
@@ -14,7 +13,7 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 @Component({
   selector: 'app-header',
-  imports: [SearchBarComponent, NotificationIconComponent, NgIf, RouterModule, AuthButtonsComponent],
+  imports: [SearchBarComponent, NotificationIconComponent, RouterModule, AuthButtonsComponent],
   templateUrl: './header.component.html',
   styleUrl: './header.component.css',
   changeDetection: ChangeDetectionStrategy.OnPush,
