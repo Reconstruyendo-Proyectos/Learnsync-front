@@ -1,38 +1,40 @@
-import { Component, inject, OnInit } from '@angular/core';
-import { SearchBarComponent } from "../../components/search-bar/search-bar.component";
-import { NotificationIconComponent } from "../../components/notification-icon/notification-icon.component";
+import { ChangeDetectionStrategy, Component, DestroyRef, inject, OnInit } from '@angular/core';
+import { SearchBarComponent } from '../../components/search-bar/search-bar.component';
+import { NotificationIconComponent } from '../../components/notification-icon/notification-icon.component';
 import { SidebarService } from '../../sections/sidebar/service/sidebar.service';
 import { NgIf } from '@angular/common';
 import { RouterModule } from '@angular/router';
-import { AuthButtonsComponent } from "../../sections/auth-buttons/auth-buttons.component";
+import { AuthButtonsComponent } from '../../sections/auth-buttons/auth-buttons.component';
 import { UserApiService } from '../../../api/user/user-api.service';
 import { UserDTO } from '../../../api/user/interfaces/user-interfaces';
 import { StorageService } from '../../../api/storage/storage.service';
 import { AuthResponseDTO } from '../../../api/auth/interfaces/auth-interfaces';
 import { AuthApiService } from '../../../api/auth/auth-api.service';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 @Component({
   selector: 'app-header',
   imports: [SearchBarComponent, NotificationIconComponent, NgIf, RouterModule, AuthButtonsComponent],
   templateUrl: './header.component.html',
-  styleUrl: './header.component.css'
+  styleUrl: './header.component.css',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class HeaderComponent implements OnInit {
   isSidebarOpen = false;
   isSidebarVisible = false;
   isAuthenticated = false;
 
-  username = "";
+  username = '';
   user: UserDTO = {
-    username: "",
-    email: "",
+    username: '',
+    email: '',
     creationDate: new Date(),
     banDate: new Date(),
     points: 0,
-    profilePhoto: "",
+    profilePhoto: '',
     role: {
-      roleName: ""
-    }
+      roleName: '',
+    },
   };
 
   authResponse: AuthResponseDTO | null = null;
@@ -41,6 +43,7 @@ export class HeaderComponent implements OnInit {
   userApiService = inject(UserApiService);
   storageService = inject(StorageService);
   authApiService = inject(AuthApiService);
+  private destroyRef = inject(DestroyRef);
 
   toggleSidebar(): void {
     this.sidebarService.toggleSidebar();
@@ -49,8 +52,9 @@ export class HeaderComponent implements OnInit {
   ngOnInit(): void {
     this.checkSidebar();
     this.checkAuthentication();
-    this.authApiService.isAuthenticated$.subscribe(isAuth => {
+    this.authApiService.isAuthenticated$.pipe(takeUntilDestroyed(this.destroyRef)).subscribe((isAuth) => {
       this.isAuthenticated = isAuth;
+      if (isAuth) this.loadData();
     });
     if (this.isAuthenticated) {
       this.loadData();
@@ -64,11 +68,11 @@ export class HeaderComponent implements OnInit {
   }
 
   private checkSidebar() {
-    this.sidebarService.isOpen$.subscribe(isOpen => {
+    this.sidebarService.isOpen$.pipe(takeUntilDestroyed(this.destroyRef)).subscribe((isOpen) => {
       this.isSidebarOpen = isOpen ?? false;
     });
 
-    this.sidebarService.isVisible$.subscribe(isVisible => {
+    this.sidebarService.isVisible$.pipe(takeUntilDestroyed(this.destroyRef)).subscribe((isVisible) => {
       this.isSidebarVisible = isVisible ?? false;
     });
   }
@@ -80,16 +84,19 @@ export class HeaderComponent implements OnInit {
   }
 
   private loadData() {
-    this.userApiService.getAuthenticatedUser().subscribe({
-      next: (res: UserDTO) => {
-        this.user = res;
-      },
-      error: (error: any) => {
-        console.error(error);
-      },
-      complete: () => {
-        this.checkProfilePhoto();
-      }
-    });
+    this.userApiService
+      .getAuthenticatedUser()
+      .pipe(takeUntilDestroyed(this.destroyRef))
+      .subscribe({
+        next: (res: UserDTO) => {
+          this.user = res;
+        },
+        error: () => {
+          // 401 manejado por errorInterceptor → toast + redirect
+        },
+        complete: () => {
+          this.checkProfilePhoto();
+        },
+      });
   }
 }

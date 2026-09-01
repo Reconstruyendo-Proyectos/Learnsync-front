@@ -1,18 +1,21 @@
-import { Component, inject, OnInit } from '@angular/core';
-import { PostListComponent } from "../../../sections/post-list/post-list.component";
+import { ChangeDetectionStrategy, Component, DestroyRef, inject, OnInit } from '@angular/core';
+import { PostListComponent } from '../../../sections/post-list/post-list.component';
 import { Thread } from '../../../../api/threads/interfaces/thread-interfaces';
 import { ThreadApiService } from '../../../../api/threads/thread-api.service';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 @Component({
   selector: 'app-home',
   imports: [PostListComponent],
   templateUrl: './home.component.html',
-  styleUrl: './home.component.css'
+  styleUrl: './home.component.css',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class HomeComponent implements OnInit {
-  threads!: Thread[];
-  page: number = 0;
-  
+  threads: Thread[] = [];
+  page = 0;
+  size = 10;
+  private destroyRef = inject(DestroyRef);
   threadApiService = inject(ThreadApiService);
 
   ngOnInit(): void {
@@ -20,8 +23,11 @@ export class HomeComponent implements OnInit {
   }
 
   private loadData() {
-    this.threadApiService.listThreads(this.page).subscribe((threads: Thread[]) => {
-      this.threads = threads;
-    });
+    this.threadApiService
+      .listThreads(this.page, this.size)
+      .pipe(takeUntilDestroyed(this.destroyRef))
+      .subscribe((threads: Thread[]) => {
+        this.threads = threads;
+      });
   }
 }
