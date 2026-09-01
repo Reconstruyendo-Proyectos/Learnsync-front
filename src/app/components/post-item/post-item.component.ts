@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, input, OnInit } from '@angular/core';
 import { Thread } from '../../../api/threads/interfaces/thread-interfaces';
 import { Temporal } from 'temporal-polyfill';
 import { NgIf } from '@angular/common';
@@ -7,26 +7,22 @@ import { NgIf } from '@angular/common';
   selector: 'app-post-item',
   imports: [NgIf],
   templateUrl: './post-item.component.html',
-  styleUrl: './post-item.component.css'
+  styleUrl: './post-item.component.css',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class PostItemComponent implements OnInit {
-  @Input() thread!: Thread;
-  @Input() topic: string = "";
-  publicationDate: string = "";
+  thread = input.required<Thread>();
+  topic = input<string>('');
+  publicationDate = '';
+
+  profilePhoto = computed(() => this.thread().profilePhoto || 'images/photo-profile-generic.webp');
 
   ngOnInit(): void {
-    this.checkImage();
     this.formatDate();
   }
 
-  private checkImage() {
-    if(this.thread.profilePhoto === null || this.thread.profilePhoto === undefined) {
-      this.thread.profilePhoto = "images/photo-profile-generic.webp";
-    }
-  }
-
   private formatDate() {
-    const start = Temporal.PlainDateTime.from(this.thread.creationDate.toString());
+    const start = Temporal.PlainDateTime.from(this.thread().creationDate.toString());
     const end = Temporal.Now.plainDateTimeISO();
     const diff = end.since(start);
     if(diff.years > 0) {
@@ -83,9 +79,10 @@ export class PostItemComponent implements OnInit {
   }
 
   getMediaType(): string {
-    if (this.thread.file.match(/\.(jpeg|jpg|png|gif)$/i)) {
+    const file = this.thread().file ?? '';
+    if (file.match(/\.(jpeg|jpg|png|gif)$/i)) {
       return 'image';
-    } else if (this.thread.file.match(/\.(mp4|mov|avi)$/i)) {
+    } else if (file.match(/\.(mp4|mov|avi)$/i)) {
       return 'direct-video';
     } else {
       return 'unknown';

@@ -1,11 +1,22 @@
 <div class="prizes">
-    <h1>Premios</h1>
-    <div class="prize-list">
-        <app-template-card-profile src="fake-images/premio-beca.webp" alt="Premio de una beca"
-            title="Premio de una beca en la academia" status="Canjeado" radius="50%" />
-        <app-template-card-profile src="fake-images/regalo.webp" alt="Regalo de un curso"
-            title="Regalo de un curso de Udemy" status="Canjeado" radius="50%" />
-        <app-template-card-profile src="fake-images/punto-exam.webp" alt="Punto para un examen"
-            title="Premio de un punto para el examen de Biología" status="Por Canjear" radius="50%" />
+    <div class="prizes-header">
+        <h1>Premios</h1>
+        <span class="points">Tus puntos: {{ userPoints() }}</span>
+    </div>
+
+    <div *ngIf="loading()" class="loading">Cargando premios…</div>
+
+    <div *ngIf="!loading() && prizes().length === 0" class="empty">No hay premios disponibles.</div>
+
+    <div class="prize-list" *ngIf="!loading()">
+        <div class="prize-card" *ngFor="let prize of prizes()">
+            <img [src]="prize.imageUrl || 'fake-images/regalo.webp'" [alt]="prize.name" class="prize-img">
+            <h3 class="prize-title">{{ prize.name }}</h3>
+            <p class="prize-desc">{{ prize.description }}</p>
+            <span class="prize-price">{{ prize.price }} pts</span>
+            <button class="prize-btn" [disabled]="!canRedeem(prize)" [class.disabled]="!canRedeem(prize)" (click)="exchange(prize)">
+                {{ canRedeem(prize) ? 'Canjear' : 'Sin puntos' }}
+            </button>
+        </div>
     </div>
 </div>

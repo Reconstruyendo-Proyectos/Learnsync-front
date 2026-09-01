@@ -1,39 +1,28 @@
+import { ChangeDetectionStrategy, Component, computed, input } from '@angular/core';
 import { NgIf } from '@angular/common';
-import { Component, Input, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-template-card-profile',
   imports: [NgIf],
   templateUrl: './template-card-profile.component.html',
-  styleUrl: './template-card-profile.component.css'
+  styleUrl: './template-card-profile.component.css',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class TemplateCardProfileComponent implements OnInit {
-  @Input() src: string = "";
-  @Input() alt: string = "";
-  @Input() title: string = "";
-  @Input() status: string = "";
-  @Input() radius: string = "";
-  @Input() width: string = "80px";
-  @Input() height: string = "";
-  isPrize: boolean = true;
+export class TemplateCardProfileComponent {
+  src = input<string>('');
+  alt = input<string>('');
+  title = input<string>('');
+  status = input<string>('');
+  radius = input<string>('');
+  width = input<string>('80px');
+  height = input<string>('');
 
-  color = "";
-
-  ngOnInit() {
-    switch (this.status) {
-      case 'Canjeado':
-        this.color = "#B9B9B9";
-        this.isPrize = true;
-        break;
-
-      case 'Por Canjear':
-        this.color = "#2dd128";
-        this.isPrize = true;
-        break;
-
-      default:
-        this.isPrize = false;
-        break;
+  isPrize = computed(() => this.status() === 'Canjeado' || this.status() === 'Por Canjear');
+  color = computed(() => {
+    switch (this.status()) {
+      case 'Canjeado': return '#B9B9B9';
+      case 'Por Canjear': return '#2dd128';
+      default: return '';
     }
-  }
+  });
 }

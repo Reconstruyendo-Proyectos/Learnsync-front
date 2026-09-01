@@ -1,5 +1,5 @@
 <div class="card-container">
-    <img [style.border-radius] = 'radius' [style.height] = 'height' [style.width] = 'width' src={{src}} alt={{alt}}>
-    <p class="title">{{title}}</p>
-    <p class="status" [style.color] = 'color' *ngIf="isPrize">{{status}}</p>
+    <img [style.border-radius]="radius()" [style.height]="height()" [style.width]="width()" [src]="src()" [alt]="alt()">
+    <p class="title">{{ title() }}</p>
+    <p class="status" [style.color]="color()" *ngIf="isPrize()">{{ status() }}</p>
 </div>

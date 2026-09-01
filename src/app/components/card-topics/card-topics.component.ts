@@ -1,23 +1,20 @@
-import { Component, Input, OnInit } from '@angular/core';
-import { ButtonComponent } from "../button/button.component";
+import { ChangeDetectionStrategy, Component, computed, input } from '@angular/core';
+import { ButtonComponent } from '../button/button.component';
 import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-card-topics',
   imports: [ButtonComponent, RouterModule],
   templateUrl: './card-topics.component.html',
-  styleUrl: './card-topics.component.css'
+  styleUrl: './card-topics.component.css',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class CardTopicsComponent implements OnInit{
-  @Input() srcImage: string = '';
-  @Input() title: string = '';
-  @Input() nroComments: string = '';
-  @Input() description: string = '';
-  @Input() slug: string = '';
+export class CardTopicsComponent {
+  srcImage = input<string>('');
+  title = input<string>('');
+  nroComments = input<string>('');
+  description = input<string>('');
+  slug = input<string>('');
 
-  uri: string = '';
-
-  ngOnInit(): void {
-      this.uri = `/topic/${this.slug}`;
-  }
+  uri = computed(() => `/topic/${this.slug()}`);
 }
