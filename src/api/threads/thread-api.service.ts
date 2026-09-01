@@ -1,39 +1,27 @@
 import { inject, Injectable } from '@angular/core';
-import { environment } from '../../environments/environment.development';
+import { environment } from '../../environments/environment';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Thread } from './interfaces/thread-interfaces';
+
+export type ThreadSortBy = 'creation-date' | 'interactions';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ThreadApiService {
 
-  baseUrl = `${environment.urlBackend}/thread`;
+  baseUrl = `${environment.apiUrl}/threads`;
   httpClient = inject(HttpClient);
 
-  getThread(id: number): Observable<any> {
+  getThread(id: number): Observable<Thread> {
     return this.httpClient.get<Thread>(`${this.baseUrl}/${id}`);
   }
 
-  listThreads(page: number): Observable<any> {
-    const params = new HttpParams().append('page', page);
-    return this.httpClient.get<Thread[]>(`${this.baseUrl}/list/`, {
-      params: params
-    });
-  }
-
-  listThreadsByCreationDate(slug: string, page: number): Observable<any> {
-    const params = new HttpParams().append('page', page);
-    return this.httpClient.get<Thread[]>(`${this.baseUrl}/list/creation-date/${slug}`, {
-      params: params
-    });
-  }
-
-  listThreadsByInteractions(page: number): Observable<any> {
-    const params = new HttpParams().append('page', page);
-    return this.httpClient.get<Thread[]>(`${this.baseUrl}/list/interactions/`, {
-      params: params
-    });
+  listThreads(page: number = 0, size: number = 10, slug?: string, sortBy?: ThreadSortBy): Observable<any> {
+    let params = new HttpParams().set('page', page).set('size', size);
+    if (slug) params = params.set('slug', slug);
+    if (sortBy) params = params.set('sortBy', sortBy);
+    return this.httpClient.get<Thread[]>(`${this.baseUrl}`, { params });
   }
 }

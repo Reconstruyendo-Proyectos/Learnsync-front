@@ -4,10 +4,11 @@ import { HeaderComponent } from "./shared/header/header.component";
 import { SidebarComponent } from "./sections/sidebar/sidebar.component";
 import { SidebarService } from './sections/sidebar/service/sidebar.service';
 import { CommonModule } from '@angular/common';
+import { ToastComponent } from './shared/toast/toast.component';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet, HeaderComponent, SidebarComponent, CommonModule],
+  imports: [RouterOutlet, HeaderComponent, SidebarComponent, CommonModule, ToastComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })

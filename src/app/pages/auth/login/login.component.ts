@@ -7,7 +7,7 @@ import { NgIf } from '@angular/common';
 import { AuthApiService } from '../../../../api/auth/auth-api.service';
 import { StorageService } from '../../../../api/storage/storage.service';
 import { AuthRequestDTO, AuthResponseDTO } from '../../../../api/auth/interfaces/auth-interfaces';
-import { environment } from '../../../../environments/environment.development';
+import { environment } from '../../../../environments/environment';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 
 @Component({
@@ -60,7 +60,7 @@ export class LoginComponent implements OnInit {
   }
 
   login() {
-    if(this.loginForm.valid){
+    if (this.loginForm.valid) {
       this.authRequest.username = this.loginForm.controls.username.value as string;
       this.authRequest.password = this.loginForm.controls.password.value as string;
       this.authApiService.login(this.authRequest).subscribe({
@@ -68,14 +68,11 @@ export class LoginComponent implements OnInit {
           this.authApiService.validateLogin();
           this.storageService.setAuthData(res as AuthResponseDTO);
           this.storageService.setLoginMethod('Normal');
+          this.router.navigateByUrl('/');
         },
         error: (error: any) => {
-          console.error(error);
-          this.formError = error.error;
+          this.formError = error?.error?.message ?? error?.error ?? 'Error al iniciar sesión';
         },
-        complete: () => {
-          this.router.navigateByUrl('/')
-        }
       });
     } else {
       this.loginForm.markAllAsTouched();
@@ -83,18 +80,17 @@ export class LoginComponent implements OnInit {
   }
 
   private handleLogin(response: any) {
-    const payload = response.credential;
-    this.authApiService.getUserByToken(payload).subscribe({
+    const payload = response.credential as string;
+    this.authApiService.loginWithGoogle(payload).subscribe({
       next: (res: AuthResponseDTO) => {
+        this.authApiService.validateLogin();
         this.storageService.setAuthData(res as AuthResponseDTO);
         this.storageService.setLoginMethod('Google');
+        this.router.navigateByUrl('/');
       },
       error: (error: any) => {
-        this.formError = error.error;
+        this.formError = error?.error?.message ?? error?.error ?? 'Error al iniciar con Google';
       },
-      complete: () => {
-        this.router.navigateByUrl('/')
-      }
     });
   }
 }

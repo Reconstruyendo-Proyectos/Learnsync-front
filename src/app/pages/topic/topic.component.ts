@@ -34,7 +34,7 @@ export class TopicComponent implements OnInit{
     this.topicApiService.getTopic(this.topicSlug).subscribe((topic: Topic) => {
       this.topic = topic;
     });
-    this.threadApiService.listThreadsByCreationDate(this.topicSlug, this.page).subscribe((threads: Thread[]) => {
+    this.threadApiService.listThreads(this.page, 10, this.topicSlug, 'creation-date').subscribe((threads: Thread[]) => {
       this.threads = threads;
     });
   }

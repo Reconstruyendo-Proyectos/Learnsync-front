@@ -1,6 +1,6 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
-import { environment } from '../../environments/environment.development';
+import { environment } from '../../environments/environment';
 import { Topic } from './interfaces/topic-interfaces';
 import { Observable } from 'rxjs';
 
@@ -10,9 +10,14 @@ import { Observable } from 'rxjs';
 export class TopicApiService {
 
   httpClient = inject(HttpClient);
-  baseUrl = `${environment.urlBackend}/topic`;
+  baseUrl = `${environment.apiUrl}/topics`;
 
-  getTopic(slug: string): Observable<any> {
+  getTopic(slug: string): Observable<Topic> {
     return this.httpClient.get<Topic>(`${this.baseUrl}/${slug}`);
+  }
+
+  getTopics(page: number = 0, size: number = 10): Observable<any> {
+    const params = new HttpParams().set('page', page).set('size', size);
+    return this.httpClient.get<any>(`${this.baseUrl}`, { params });
   }
 }

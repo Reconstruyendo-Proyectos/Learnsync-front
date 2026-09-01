@@ -1,0 +1,11 @@
+<div class="toast-container" aria-live="polite" aria-atomic="true">
+  <div
+    *ngFor="let toast of notificationService.toasts()"
+    class="toast"
+    [ngClass]="'toast-' + toast.type"
+    role="alert"
+  >
+    <span class="toast-message">{{ toast.message }}</span>
+    <button class="toast-close" (click)="notificationService.dismiss(toast.id)" aria-label="Cerrar notificación">×</button>
+  </div>
+</div>

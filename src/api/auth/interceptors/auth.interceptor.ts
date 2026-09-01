@@ -5,13 +5,11 @@ import { StorageService } from '../../storage/storage.service';
 export const authInterceptor: HttpInterceptorFn = (req, next) => {
   const storageService = inject(StorageService);
   const token = storageService.getAuthData()?.token;
-  const loginMethod = storageService.getLoginMethod();
 
-  if(token) {
+  if (token) {
     const request = req.clone({
-      headers: req.headers.set('Authorization', loginMethod === 'Google' ? `Google ${token}` : `Bearer ${token}`)
+      headers: req.headers.set('Authorization', `Bearer ${token}`),
     });
-
     return next(request);
   }
   return next(req);

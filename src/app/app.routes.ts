@@ -10,17 +10,20 @@ import { ForgotPasswordComponent } from './pages/auth/forgot-password/forgot-pas
 import { ProfileComponent } from './pages/profile/profile.component';
 import { TopicComponent } from './pages/topic/topic.component';
 import { ThreadPageComponent } from './pages/thread-page/thread-page.component';
+import { NotFoundComponent } from './pages/not-found/not-found.component';
 
 export const routes: Routes = [
-    { path: '', component: HomeComponent },
-    { path: 'about', component: AboutComponent },
-    { path: 'history', component: HistoryComponent },
-    { path: 'popular', component: PopularComponent },
-    { path: 'categories', component: CategoriesComponent },
-    { path: 'login', component: LoginComponent },
-    { path: 'register', component: RegisterComponent },
-    { path: 'forgot-password', component: ForgotPasswordComponent },
-    { path: ':username', component: ProfileComponent },
-    { path: 'topic/:slug', component: TopicComponent},
-    { path: 'thread/:id', component: ThreadPageComponent}
+  { path: '', component: HomeComponent },
+  { path: 'about', component: AboutComponent },
+  { path: 'history', component: HistoryComponent },
+  { path: 'popular', component: PopularComponent },
+  { path: 'categories', component: CategoriesComponent },
+  { path: 'login', component: LoginComponent },
+  { path: 'register', component: RegisterComponent },
+  { path: 'forgot-password', component: ForgotPasswordComponent },
+  { path: 'topic/:slug', component: TopicComponent },
+  { path: 'thread/:id', component: ThreadPageComponent },
+  { path: 'profile/:username', component: ProfileComponent },
+  { path: 'not-found', component: NotFoundComponent },
+  { path: '**', redirectTo: 'not-found' },
 ];

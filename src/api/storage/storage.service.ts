@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { AuthResponseDTO } from '../auth/interfaces/auth-interfaces';
-import { environment } from '../../environments/environment.development';
+import { environment } from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root'

@@ -20,7 +20,7 @@ export class PopularComponent implements OnInit{
   }
 
   private loadData() {
-    this.threadApiService.listThreadsByInteractions(this.page).subscribe((threads: Thread[]) => {
+    this.threadApiService.listThreads(this.page, 10, undefined, 'interactions').subscribe((threads: Thread[]) => {
       this.threads = threads;
     });
   }
