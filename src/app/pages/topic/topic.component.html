@@ -1,3 +1,7 @@
 <app-topic-header [bannerUrl]="topic.topicPoster" [logoUrl]="topic.topicIcon" [topicName]="topic.name" />
 
+<div class="actions">
+  <a [routerLink]="['/topic', topicSlug, 'create']" class="btn-create">+ Crear hilo</a>
+</div>
+
 <app-post-list [threads]="threads" [topic]="topic.name"/>

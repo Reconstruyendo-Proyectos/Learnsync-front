@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, DestroyRef, inject, OnInit } from '@angular/core';
 import { TopicHeaderComponent } from '../../sections/topic/topic-header/topic-header.component';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, RouterModule } from '@angular/router';
 import { TopicApiService } from '../../../api/topic/topic-api.service';
 import { Topic } from '../../../api/topic/interfaces/topic-interfaces';
 import { PostListComponent } from '../../sections/post-list/post-list.component';
@@ -10,7 +10,7 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 @Component({
   selector: 'app-topic',
-  imports: [TopicHeaderComponent, PostListComponent],
+  imports: [TopicHeaderComponent, PostListComponent, RouterModule],
   templateUrl: './topic.component.html',
   styleUrl: './topic.component.css',
   changeDetection: ChangeDetectionStrategy.OnPush,
