@@ -6,6 +6,11 @@
     box-sizing: border-box;
 }
 
+html, body {
+    background: #DAE0E6;
+    min-height: 100vh;
+}
+
 ul, ol {
     list-style-type: none;
     font-family: "Blinker", serif;
