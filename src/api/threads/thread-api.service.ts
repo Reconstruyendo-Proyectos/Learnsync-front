@@ -3,6 +3,7 @@ import { environment } from '../../environments/environment';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Thread } from './interfaces/thread-interfaces';
+import { Page } from '../shared/page';
 
 export type ThreadSortBy = 'creation-date' | 'interactions';
 
@@ -22,10 +23,10 @@ export class ThreadApiService {
     return this.httpClient.post<Thread>(`${this.baseUrl}`, data);
   }
 
-  listThreads(page: number = 0, size: number = 10, slug?: string, sortBy?: ThreadSortBy): Observable<any> {
+  listThreads(page: number = 0, size: number = 10, slug?: string, sortBy?: ThreadSortBy): Observable<Page<Thread>> {
     let params = new HttpParams().set('page', page).set('size', size);
     if (slug) params = params.set('slug', slug);
     if (sortBy) params = params.set('sortBy', sortBy);
-    return this.httpClient.get<Thread[]>(`${this.baseUrl}`, { params });
+    return this.httpClient.get<Page<Thread>>(`${this.baseUrl}`, { params });
   }
 }

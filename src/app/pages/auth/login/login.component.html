@@ -5,10 +5,10 @@
             <app-input typeInput="text" placeholder="Usuario" formControlName="username"/>
             <app-input typeInput="password" placeholder="Contraseña" formControlName="password"/>
             @if (formError !== '') {
-              <label class="form-error">{{formError}}</label>
+              <span class="form-error" role="alert">{{formError}}</span>
             }
             <app-button text="Iniciar Sesión" padding="10px" width="15rem" hoverColor="#1f6f9b" radius="0" (click)="login()"/>
-            <button id="google-btn"></button>
+            <button id="google-btn" aria-label="Iniciar sesión con Google">Google</button>
         </form>
         <p>¿Aún no tienes cuenta? <span class="url" routerLink="/register">Registrate aquí</span></p>
         <p class="url" routerLink="/forgot-password">¿Olvidaste tu contraseña?</p>

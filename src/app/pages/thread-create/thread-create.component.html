@@ -5,8 +5,8 @@
     <textarea formControlName="message" placeholder="Texto (opcional si subes imagen)" rows="6" class="input"></textarea>
 
     <div class="upload">
-      <label class="upload-label">Imagen (opcional)</label>
-      <input type="file" accept="image/*" (change)="onFile($event)">
+      <span class="upload-label">Imagen (opcional)</span>
+      <input type="file" accept="image/*" (change)="onFile($event)" id="fileInput">
       @if (uploading()) { <span class="hint">Subiendo…</span> }
       @if (fileUrl()) { <img [src]="fileUrl()!" alt="preview" class="preview"> }
     </div>

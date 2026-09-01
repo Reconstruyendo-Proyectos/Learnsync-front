@@ -9,14 +9,14 @@
         </svg>
         <div class="notification-number"><span class="number">9+</span></div>
     </div>
-    <img class="profile" [src]="image" alt="Foto de perfil" (click)="toggleDropdown()">
+    <img class="profile" [src]="image" alt="Foto de perfil" (click)="toggleDropdown()" (keydown.enter)="toggleDropdown()" tabindex="0" role="button">
     @if (isDropdownOpen) {
       <div class="dropdown">
           <ul>
               <li routerLink="/jluyo">Mi Perfil</li>
               <li>Canjear Puntos</li>
               <li>Modo Oscuro</li>
-              <li (click)="logout()">Cerrar Sesión</li>
+              <li (click)="logout()" (keydown.enter)="logout()" tabindex="0" role="button">Cerrar Sesión</li>
           </ul>
       </div>
     }

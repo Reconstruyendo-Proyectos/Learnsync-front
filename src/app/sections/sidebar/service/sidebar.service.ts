@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 import { Router, NavigationEnd } from '@angular/router';
 import { filter } from 'rxjs/operators';
@@ -15,7 +15,9 @@ export class SidebarService {
 
   private excludedRoutes = ['/login', '/register', '/forgot'];
 
-  constructor(private router: Router) {
+  private router = inject(Router);
+
+  constructor() {
     this.router.events.pipe(
       filter(event => event instanceof NavigationEnd)
     ).subscribe((event: NavigationEnd) => {

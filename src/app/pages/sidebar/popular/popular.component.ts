@@ -26,8 +26,8 @@ export class PopularComponent implements OnInit {
     this.threadApiService
       .listThreads(this.page, this.size, undefined, 'interactions')
       .pipe(takeUntilDestroyed(this.destroyRef))
-      .subscribe((threads: Thread[]) => {
-        this.threads = threads;
+      .subscribe((page) => {
+        this.threads = page.content ?? [];
       });
   }
 }

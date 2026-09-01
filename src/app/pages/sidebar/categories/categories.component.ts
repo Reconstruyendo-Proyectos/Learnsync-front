@@ -27,7 +27,7 @@ export class CategoriesComponent implements OnInit {
       .getCategories(this.page, this.size)
       .pipe(takeUntilDestroyed(this.destroyRef))
       .subscribe((response) => {
-        this.categories = response;
+        this.categories = response.content ?? [];
       });
   }
 }

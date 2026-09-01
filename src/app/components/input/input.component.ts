@@ -18,21 +18,21 @@ export class InputComponent implements ControlValueAccessor{
   @Input() typeInput: string = '';
   @Input() placeholder: string = '';
 
-  value: string = '';
-  onChange: any = () => {};
-  onTouched: any = () => {};
+  value = '';
+  onChange: (value: string) => void = () => {};
+  onTouched: () => void = () => {};
 
-  writeValue(value: any): void {
+  writeValue(value: string | null): void {
     if (value !== undefined) {
       this.value = value || '';
     }
   }
 
-  registerOnChange(fn: any): void {
+  registerOnChange(fn: (value: string) => void): void {
     this.onChange = fn;
   }
 
-  registerOnTouched(fn: any): void {
+  registerOnTouched(fn: () => void): void {
     this.onTouched = fn;
   }
 

@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, DestroyRef, HostListener, inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component, DestroyRef, HostListener, inject, OnInit } from '@angular/core';
 import { ButtonComponent } from '../../../components/button/button.component';
 import { InputComponent } from '../../../components/input/input.component';
 import { RouterModule } from '@angular/router';
@@ -15,7 +15,7 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
   styleUrl: './register.component.css',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class RegisterComponent {
+export class RegisterComponent implements OnInit {
   showImage = true;
   isModalVisible = false;
   submitting = false;
@@ -41,14 +41,14 @@ export class RegisterComponent {
       return;
     }
     this.submitting = true;
-    const { username, email, password } = this.registerForm.value as any;
+    const { username, email, password } = this.registerForm.value as { username: string; email: string; password: string };
     this.authApi.register({ username, email, password }).pipe(takeUntilDestroyed(this.destroyRef)).subscribe({
       next: () => {
         this.isModalVisible = true;
         this.notify.success('Cuenta registrada. Revisa tu email para activarla.');
       },
-      error: (err) => {
-        const msg = err?.error?.message ?? err?.error ?? 'No se pudo registrar.';
+      error: (err: { error?: { message?: string } | string }) => {
+        const msg = (err?.error as { message?: string })?.message ?? (err?.error as string) ?? 'No se pudo registrar.';
         this.notify.error(msg);
       },
       complete: () => (this.submitting = false),
@@ -58,8 +58,8 @@ export class RegisterComponent {
   openModal() { this.isModalVisible = true; }
   closeModal() { this.isModalVisible = false; }
 
-  @HostListener('window:resize', ['$event'])
-  onResize(event: Event): void {
+  @HostListener('window:resize')
+  onResize(): void {
     this.checkScreenWidth();
   }
 

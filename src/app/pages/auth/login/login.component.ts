@@ -1,13 +1,22 @@
-declare const google: any;
+import { HttpErrorResponse } from '@angular/common/http';
 import { Component, HostListener, inject, OnInit } from '@angular/core';
-import { InputComponent } from "../../../components/input/input.component";
-import { ButtonComponent } from "../../../components/button/button.component";
+import { InputComponent } from '../../../components/input/input.component';
+import { ButtonComponent } from '../../../components/button/button.component';
 import { Router, RouterModule } from '@angular/router';
 import { AuthApiService } from '../../../../api/auth/auth-api.service';
 import { StorageService } from '../../../../api/storage/storage.service';
 import { AuthRequestDTO, AuthResponseDTO } from '../../../../api/auth/interfaces/auth-interfaces';
 import { environment } from '../../../../environments/environment';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
+
+declare const google: {
+  accounts: {
+    id: {
+      initialize: (options: { client_id: string; callback: (response: { credential: string }) => void }) => void;
+      renderButton: (element: HTMLElement | null, options: unknown) => void;
+    };
+  };
+};
 
 @Component({
   selector: 'app-login',
@@ -39,7 +48,7 @@ export class LoginComponent implements OnInit {
     this.checkScreenWidth();
     google.accounts.id.initialize({
       client_id: environment.googleClientId,
-      callback: (res: any) => this.handleLogin(res)
+      callback: (res: { credential: string }) => this.handleLogin(res),
     });
 
     google.accounts.id.renderButton(document.getElementById("google-btn"), {
@@ -49,8 +58,8 @@ export class LoginComponent implements OnInit {
     });
   }
 
-  @HostListener('window:resize', ['$event'])
-  onResize(event: Event): void {
+  @HostListener('window:resize')
+  onResize(): void {
     this.checkScreenWidth();
   }
 
@@ -69,8 +78,9 @@ export class LoginComponent implements OnInit {
           this.storageService.setLoginMethod('Normal');
           this.router.navigateByUrl('/');
         },
-        error: (error: any) => {
-          this.formError = error?.error?.message ?? error?.error ?? 'Error al iniciar sesión';
+        error: (error: HttpErrorResponse) => {
+          const msg = (error.error as { message?: string })?.message ?? (error.error as string) ?? 'Error al iniciar sesión';
+          this.formError = msg;
         },
       });
     } else {
@@ -78,8 +88,8 @@ export class LoginComponent implements OnInit {
     }
   }
 
-  private handleLogin(response: any) {
-    const payload = response.credential as string;
+  private handleLogin(response: { credential: string }) {
+    const payload = response.credential;
     this.authApiService.loginWithGoogle(payload).subscribe({
       next: (res: AuthResponseDTO) => {
         this.authApiService.validateLogin();
@@ -87,8 +97,9 @@ export class LoginComponent implements OnInit {
         this.storageService.setLoginMethod('Google');
         this.router.navigateByUrl('/');
       },
-      error: (error: any) => {
-        this.formError = error?.error?.message ?? error?.error ?? 'Error al iniciar con Google';
+      error: (error: HttpErrorResponse) => {
+        const msg = (error.error as { message?: string })?.message ?? (error.error as string) ?? 'Error al iniciar con Google';
+        this.formError = msg;
       },
     });
   }

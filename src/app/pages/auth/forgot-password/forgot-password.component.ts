@@ -1,6 +1,6 @@
-import { Component, HostListener } from '@angular/core';
-import { ButtonComponent } from "../../../components/button/button.component";
-import { InputComponent } from "../../../components/input/input.component";
+import { Component, HostListener, OnInit } from '@angular/core';
+import { ButtonComponent } from '../../../components/button/button.component';
+import { InputComponent } from '../../../components/input/input.component';
 import { RouterModule } from '@angular/router';
 import { ModalComponent } from '../../../components/modal/modal.component';
 
@@ -10,7 +10,7 @@ import { ModalComponent } from '../../../components/modal/modal.component';
   templateUrl: './forgot-password.component.html',
   styleUrl: './forgot-password.component.css'
 })
-export class ForgotPasswordComponent {
+export class ForgotPasswordComponent implements OnInit {
   showImage = true;
   isModalVisible = false;
 
@@ -26,8 +26,8 @@ export class ForgotPasswordComponent {
     this.isModalVisible = false;
   }
 
-  @HostListener('window:resize', ['$event'])
-  onResize(event: Event): void {
+  @HostListener('window:resize')
+  onResize(): void {
     this.checkScreenWidth();
   }
 

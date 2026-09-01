@@ -44,7 +44,7 @@ export class ThreadCreateComponent {
           this.fileUrl.set(res.url);
           this.notify.success('Imagen subida.');
         },
-        error: (err) => this.notify.error(err?.error?.message ?? 'Error al subir imagen.'),
+        error: (err: { error?: { message?: string } | string }) => this.notify.error((err?.error as { message?: string })?.message ?? (err?.error as string) ?? 'Error al subir imagen.'),
         complete: () => this.uploading.set(false),
       });
   }
@@ -55,17 +55,17 @@ export class ThreadCreateComponent {
       return;
     }
     this.submitting.set(true);
-    const { title, message } = this.form.value as any;
+    const { title, message } = this.form.value as { title: string; message: string };
     this.threadApi
       .createThread({ title, message, topicSlug: this.topicSlug(), file: this.fileUrl() ?? undefined })
       .pipe(takeUntilDestroyed(this.destroyRef))
       .subscribe({
-        next: (t: any) => {
+        next: (t: { idThread?: number; id?: number }) => {
           this.notify.success('Hilo creado.');
           this.router.navigate(['/thread', t.idThread ?? t.id]);
         },
-        error: (err) => {
-          const msg = err?.error?.message ?? err?.error ?? 'No se pudo crear el hilo.';
+        error: (err: { error?: { message?: string } | string }) => {
+          const msg = (err?.error as { message?: string })?.message ?? (err?.error as string) ?? 'No se pudo crear el hilo.';
           this.notify.error(msg);
           this.submitting.set(false);
         },

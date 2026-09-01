@@ -44,7 +44,7 @@ export class ThreadPageComponent implements OnInit {
       .getCommentsByThread(id, 0, 10)
       .pipe(takeUntilDestroyed(this.destroyRef))
       .subscribe({
-        next: (res: any) => this.comments.set(res.content ?? res ?? []),
+        next: (res: { content?: Comment[] } | Comment[]) => this.comments.set((res as { content: Comment[] }).content ?? (res as Comment[]) ?? []),
         error: () => this.notify.warning('No se pudieron cargar comentarios.'),
       });
   }
@@ -79,7 +79,7 @@ export class ThreadPageComponent implements OnInit {
           this.newMessage.set('');
           this.notify.success('Comentario publicado.');
         },
-        error: (err) => this.notify.error(err?.error?.message ?? 'No se pudo comentar.'),
+        error: (err: { error?: { message?: string } | string }) => this.notify.error((err?.error as { message?: string })?.message ?? (err?.error as string) ?? 'No se pudo comentar.'),
       });
   }
 

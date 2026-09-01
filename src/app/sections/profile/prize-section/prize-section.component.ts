@@ -31,8 +31,8 @@ export class PrizeSectionComponent implements OnInit {
       .getPrizes(0, 10)
       .pipe(takeUntilDestroyed(this.destroyRef))
       .subscribe({
-        next: (res: any) => {
-          const list: Prize[] = res.content ?? res ?? [];
+        next: (res: { content?: Prize[] } | Prize[]) => {
+          const list: Prize[] = (res as { content: Prize[] }).content ?? (res as Prize[]) ?? [];
           this.prizes.set(list);
         },
         error: () => this.notify.warning('No se pudieron cargar los premios.'),
@@ -57,8 +57,9 @@ export class PrizeSectionComponent implements OnInit {
           this.notify.success(`¡Canjeado: ${prize.name}!`);
           this.userPoints.update((p) => p - prize.price);
         },
-        error: (err) => {
-          const msg = err?.error?.message ?? err?.error ?? '';
+        error: (err: { status?: number; error?: { message?: string } | string }) => {
+          const raw = (err?.error as { message?: string })?.message ?? (err?.error as string) ?? '';
+          const msg = raw;
           if (msg.toLowerCase().includes('puntos insuficientes')) {
             this.notify.warning('Puntos insuficientes.');
           } else if (msg.toLowerCase().includes('ya canjeado') || err.status === 409) {

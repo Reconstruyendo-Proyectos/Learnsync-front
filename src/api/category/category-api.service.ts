@@ -2,6 +2,7 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Category } from './interfaces/category-interfaces';
+import { Page } from '../shared/page';
 import { environment } from '../../environments/environment';
 
 @Injectable({
@@ -12,9 +13,9 @@ export class CategoryApiService {
   httpClient = inject(HttpClient);
   baseUrl = `${environment.apiUrl}/categories`;
 
-  getCategories(page: number = 0, size: number = 10): Observable<any> {
+  getCategories(page: number = 0, size: number = 10): Observable<Page<Category>> {
     const params = new HttpParams().set('page', page).set('size', size);
-    return this.httpClient.get<Category>(`${this.baseUrl}`, {
+    return this.httpClient.get<Page<Category>>(`${this.baseUrl}`, {
       params: params
     });
   }

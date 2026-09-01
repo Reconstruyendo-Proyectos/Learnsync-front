@@ -43,8 +43,8 @@ export class TopicComponent implements OnInit {
     this.threadApiService
       .listThreads(this.page, this.size, this.topicSlug, 'creation-date')
       .pipe(takeUntilDestroyed(this.destroyRef))
-      .subscribe((threads: Thread[]) => {
-        this.threads = threads;
+      .subscribe((page) => {
+        this.threads = page.content ?? [];
       });
   }
 }

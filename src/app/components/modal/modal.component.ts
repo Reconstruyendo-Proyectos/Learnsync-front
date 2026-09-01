@@ -11,9 +11,9 @@ export class ModalComponent {
   @Input() isVisible = false;
   @Input() title = '';
   @Input() message = '';
-  @Output() close = new EventEmitter<void>();
+  @Output() closed = new EventEmitter<void>();
 
   closeModal(): void {
-    this.close.emit();
+    this.closed.emit();
   }
 }

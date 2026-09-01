@@ -2,6 +2,7 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { environment } from '../../environments/environment';
 import { Topic } from './interfaces/topic-interfaces';
+import { Page } from '../shared/page';
 import { Observable } from 'rxjs';
 
 @Injectable({
@@ -16,8 +17,8 @@ export class TopicApiService {
     return this.httpClient.get<Topic>(`${this.baseUrl}/${slug}`);
   }
 
-  getTopics(page: number = 0, size: number = 10): Observable<any> {
+  getTopics(page: number = 0, size: number = 10): Observable<Page<Topic>> {
     const params = new HttpParams().set('page', page).set('size', size);
-    return this.httpClient.get<any>(`${this.baseUrl}`, { params });
+    return this.httpClient.get<Page<Topic>>(`${this.baseUrl}`, { params });
   }
 }
