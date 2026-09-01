@@ -9,8 +9,10 @@ export const routes: Routes = [
   { path: 'categories', loadComponent: () => import('./pages/sidebar/categories/categories.component').then((m) => m.CategoriesComponent) },
   { path: 'login', canActivate: [guestGuard], loadComponent: () => import('./pages/auth/login/login.component').then((m) => m.LoginComponent) },
   { path: 'register', canActivate: [guestGuard], loadComponent: () => import('./pages/auth/register/register.component').then((m) => m.RegisterComponent) },
+  { path: 'activate/:token', loadComponent: () => import('./pages/auth/confirm/confirm.component').then((m) => m.ConfirmComponent) },
   { path: 'forgot-password', canActivate: [guestGuard], loadComponent: () => import('./pages/auth/forgot-password/forgot-password.component').then((m) => m.ForgotPasswordComponent) },
   { path: 'topic/:slug', loadComponent: () => import('./pages/topic/topic.component').then((m) => m.TopicComponent) },
+  { path: 'topic/:slug/create', canActivate: [authGuard], loadComponent: () => import('./pages/thread-create/thread-create.component').then((m) => m.ThreadCreateComponent) },
   { path: 'thread/:id', loadComponent: () => import('./pages/thread-page/thread-page.component').then((m) => m.ThreadPageComponent) },
   {
     path: 'profile/:username',

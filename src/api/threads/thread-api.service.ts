@@ -18,6 +18,10 @@ export class ThreadApiService {
     return this.httpClient.get<Thread>(`${this.baseUrl}/${id}`);
   }
 
+  createThread(data: { title: string; message: string; topicSlug: string; file?: string }): Observable<Thread> {
+    return this.httpClient.post<Thread>(`${this.baseUrl}`, data);
+  }
+
   listThreads(page: number = 0, size: number = 10, slug?: string, sortBy?: ThreadSortBy): Observable<any> {
     let params = new HttpParams().set('page', page).set('size', size);
     if (slug) params = params.set('slug', slug);

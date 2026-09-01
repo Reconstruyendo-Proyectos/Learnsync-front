@@ -1,0 +1,13 @@
+<div class="confirm">
+  @if (status() === 'loading') {
+    <p>Activando cuenta…</p>
+  } @else if (status() === 'success') {
+    <h1>¡Cuenta activada!</h1>
+    <p>{{ message() }}</p>
+    <a routerLink="/login" class="btn">Ir a login</a>
+  } @else {
+    <h1>Error de activación</h1>
+    <p>{{ message() }}</p>
+    <a routerLink="/register" class="btn secondary">Registrarse de nuevo</a>
+  }
+</div>

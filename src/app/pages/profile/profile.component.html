@@ -1,7 +1,11 @@
 <div class="profile-container">
     <div class="profile">
         <div class="image">
-            <img src={{user.profilePhoto}} alt="Foto de perfil">
+            <img [src]="user.profilePhoto" alt="Foto de perfil">
+            <div class="photo-actions">
+              <label class="btn small">Cambiar <input type="file" accept="image/*" hidden (change)="onPhoto($event)"></label>
+              <button class="btn small secondary" (click)="removePhoto()">Quitar</button>
+            </div>
         </div>
         <div class="username-points">
             <div class="username">
